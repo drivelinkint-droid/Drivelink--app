@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>List Your Car — DriveLink Int’l</title>
+
+  <meta
+    name="description"
+    content="List your vehicle on DriveLink Int’l and connect with customers looking for reliable rental vehicles in Kenya."
+  >
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* =========================================================
+       LIST YOUR CAR PAGE
+       ========================================================= */
+
+    .list-car-page {
+      background: #f5f6f7;
+      padding: 50px 0 70px;
+    }
+
+    .list-car-layout {
+      width: min(1180px, 92%);
+      margin: 0 auto;
+
+      display: grid;
+      grid-template-columns: 0.72fr 1.28fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    /* =========================================================
+       LEFT INFORMATION PANEL
+       ========================================================= */
+
+    .list-car-info {
+      background: #111820;
+      color: #fff;
+
+      padding: 34px;
+      border-radius: 18px;
+
+      position: sticky;
+      top: 20px;
+
+      overflow: hidden;
+    }
+
+    .list-car-info::before {
+      content: "";
+      position: absolute;
+
+      width: 190px;
+      height: 190px;
+
+      right: -90px;
+      top: -90px;
+
+      border-radius: 50%;
+
+      background: rgba(214,170,69,0.12);
+    }
+
+    .list-car-info h1 {
+      position: relative;
+
+      margin: 0 0 15px;
+
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.05;
+
+      letter-spacing: -1px;
+    }
+
+    .list-car-info h1 span {
+      color: #d6aa45;
+    }
+
+    .list-car-info > p {
+      position: relative;
+
+      margin: 0 0 25px;
+
+      color: rgba(255,255,255,0.78);
+
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .owner-benefits {
+      position: relative;
+
+      list-style: none;
+
+      margin: 0;
+      padding: 0;
+
+      display: grid;
+      gap: 12px;
+    }
+
+    .owner-benefits li {
+      display: flex;
+      align-items: flex-start;
+
+      gap: 9px;
+
+      color: rgba(255,255,255,0.92);
+
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .owner-benefits li::before {
+      content: "✓";
+
+      flex-shrink: 0;
+
+      width: 23px;
+      height: 23px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background: #d6aa45;
+      color: #111820;
+
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .owner-note {
+      position: relative;
+
+      margin-top: 28px;
+
+      padding: 17px;
+
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+
+      background: rgba(255,255,255,0.05);
+    }
+
+    .owner-note strong {
+      display: block;
+
+      margin-bottom: 5px;
+
+      color: #d6aa45;
+
+      font-size: 13px;
+    }
+
+    .owner-note p {
+      margin: 0;
+
+      color: rgba(255,255,255,0.72);
+
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       RIGHT FORM
+       ========================================================= */
+
+    .list-car-form-card {
+      background: #fff;
+
+      padding: 30px;
+
+      border: 1px solid #e1e5e8;
+      border-radius: 18px;
+
+      box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+    }
+
+    .list-car-form-header {
+      margin-bottom: 23px;
+
+      padding-bottom: 18px;
+
+      border-bottom: 1px solid #edf0f2;
+    }
+
+    .list-car-form-header h2 {
+      margin: 0 0 6px;
+
+      color: #111820;
+
+      font-size: 24px;
+    }
+
+    .list-car-form-header p {
+      margin: 0;
+
+      color: #68727b;
+
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* =========================================================
+       MESSAGE
+       ========================================================= */
+
+    .list-message {
+      display: none;
+
+      margin-bottom: 18px;
+
+      padding: 12px 14px;
+
+      border-radius: 8px;
+
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .list-message.success {
+      display: block;
+
+      background: #edf8f0;
+      border: 1px solid #b8dfc2;
+
+      color: #236638;
+    }
+
+    .list-message.error {
+      display: block;
+
+      background: #fff0f0;
+      border: 1px solid #e4bcbc;
+
+      color: #9b2929;
+    }
+
+    /* =========================================================
+       FORM GRID
+       ========================================================= */
+
+    .list-form-grid {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 16px 14px;
+    }
+
+    .list-form-group {
+      min-width: 0;
+    }
+
+    .list-form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .list-form-group label {
+      display: block;
+
+      margin-bottom: 6px;
+
+      color: #111820;
+
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .list-form-group input,
+    .list-form-group select,
+    .list-form-group textarea {
+      width: 100%;
+
+      box-sizing: border-box;
+
+      border: 1px solid #d8dde1;
+      border-radius: 8px;
+
+      background: #fff;
+      color: #111820;
+
+      outline: none;
+
+      font-family: inherit;
+
+      transition: 0.2s ease;
+    }
+
+    .list-form-group input,
+    .list-form-group select {
+      height: 46px;
+
+      padding: 0 12px;
+    }
+
+    .list-form-group textarea {
+      min-height: 115px;
+
+      padding: 12px;
+
+      resize: vertical;
+    }
+
+    .list-form-group input:focus,
+    .list-form-group select:focus,
+    .list-form-group textarea:focus {
+      border-color: #c99a2e;
+
+      box-shadow:
+        0 0 0 3px rgba(201,154,46,0.12);
+    }
+
+    /* =========================================================
+       DRIVING OPTIONS
+       ========================================================= */
+
+    .driving-section {
+      padding: 16px;
+
+      border: 1px solid #e1e5e8;
+      border-radius: 10px;
+
+      background: #fafbfb;
+    }
+
+    .driving-section-title {
+      margin: 0 0 5px;
+
+      color: #111820;
+
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .driving-help {
+      margin: 0 0 12px;
+
+      color: #747d85;
+
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .drive-choice-grid {
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 9px;
+    }
+
+    .drive-choice {
+      position: relative;
+    }
+
+    .drive-choice input {
+      position: absolute;
+
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .drive-choice label {
+      min-height: 70px;
+
+      margin: 0;
+      padding: 11px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      border: 1px solid #d8dde1;
+      border-radius: 9px;
+
+      background: #fff;
+
+      cursor: pointer;
+
+      transition: 0.2s ease;
+    }
+
+    .drive-choice label strong {
+      color: #111820;
+
+      font-size: 12px;
+    }
+
+    .drive-choice label span {
+      margin-top: 4px;
+
+      color: #707981;
+
+      font-size: 10px;
+      line-height: 1.4;
+      font-weight: 400;
+    }
+
+    .drive-choice input:checked + label {
+      border-color: #c99a2e;
+
+      background: #fffaf0;
+
+      box-shadow:
+        0 0 0 2px rgba(201,154,46,0.10);
+    }
+
+    /* =========================================================
+       RATE GRID
+       ========================================================= */
+
+    .rate-grid {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 12px;
+
+      margin-top: 13px;
+    }
+
+    .rate-field.is-hidden {
+      display: none;
+    }
+
+    .rate-field small {
+      display: block;
+
+      margin-top: 5px;
+
+      color: #747d85;
+
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    /* =========================================================
+       PHOTO UPLOAD
+       ========================================================= */
+
+    .photo-upload-box {
+      padding: 17px;
+
+      border: 2px dashed #d7dce0;
+      border-radius: 10px;
+
+      background: #fafbfb;
+
+      text-align: center;
+    }
+
+    .photo-upload-box input {
+      height: auto;
+
+      padding: 0;
+
+      border: 0;
+
+      background: transparent;
+    }
+
+    .photo-upload-box p {
+      margin: 7px 0 0;
+
+      color: #747d85;
+
+      font-size: 10px;
+    }
+
+    .photo-preview-grid {
+      display: grid;
+
+      grid-template-columns: repeat(4, 1fr);
+
+      gap: 8px;
+
+      margin-top: 11px;
+    }
+
+    .photo-preview-grid img {
+      width: 100%;
+      height: 80px;
+
+      display: block;
+
+      object-fit: cover;
+
+      border-radius: 7px;
+
+      border: 1px solid #e0e4e7;
+    }
+
+    /* =========================================================
+       BUTTONS
+       ========================================================= */
+
+    .list-form-actions {
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      flex-wrap: wrap;
+
+      margin-top: 2px;
+    }
+
+    .list-submit {
+      min-height: 47px;
+
+      padding: 0 25px;
+
+      border: 0;
+      border-radius: 8px;
+
+      background: #111820;
+      color: #fff;
+
+      font-size: 14px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: 0.2s ease;
+    }
+
+    .list-submit:hover {
+      background: #c99a2e;
+    }
+
+    .list-submit:disabled {
+      opacity: 0.65;
+
+      cursor: wait;
+    }
+
+    /* =========================================================
+       TABLET
+       ========================================================= */
+
+    @media (max-width: 900px) {
+
+      .list-car-layout {
+        grid-template-columns: 0.8fr 1.2fr;
+
+        gap: 18px;
+      }
+
+      .list-car-info {
+        padding: 25px;
+      }
+
+      .list-car-form-card {
+        padding: 22px;
+      }
+
+      .drive-choice-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* =========================================================
+       PHONE
+       KEEP TWO COLUMNS
+       ========================================================= */
+
+    @media (max-width: 700px) {
+
+      .list-car-page {
+        padding: 28px 0 45px;
+      }
+
+      .list-car-layout {
+        width: 94%;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 9px;
+      }
+
+      /* LEFT */
+
+      .list-car-info {
+        position: static;
+
+        padding: 16px 12px;
+
+        border-radius: 11px;
+      }
+
+      .list-car-info h1 {
+        font-size: 24px;
+
+        margin-bottom: 9px;
+      }
+
+      .list-car-info > p {
+        font-size: 9px;
+
+        line-height: 1.5;
+
+        margin-bottom: 13px;
+      }
+
+      .owner-benefits {
+        gap: 8px;
+      }
+
+      .owner-benefits li {
+        gap: 5px;
+
+        font-size: 8px;
+
+        line-height: 1.4;
+      }
+
+      .owner-benefits li::before {
+        width: 15px;
+        height: 15px;
+
+        font-size: 8px;
+      }
+
+      .owner-note {
+        margin-top: 13px;
+
+        padding: 9px;
+      }
+
+      .owner-note strong {
+        font-size: 9px;
+      }
+
+      .owner-note p {
+        font-size: 7px;
+
+        line-height: 1.4;
+      }
+
+      /* RIGHT */
+
+      .list-car-form-card {
+        padding: 13px 10px;
+
+        border-radius: 11px;
+      }
+
+      .list-car-form-header {
+        margin-bottom: 13px;
+
+        padding-bottom: 11px;
+      }
+
+      .list-car-form-header h2 {
+        font-size: 16px;
+      }
+
+      .list-car-form-header p {
+        font-size: 8px;
+
+        line-height: 1.4;
+      }
+
+      /* FORM */
+
+      .list-form-grid {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 8px 6px;
+      }
+
+      .list-form-group label {
+        margin-bottom: 3px;
+
+        font-size: 7px;
+      }
+
+      .list-form-group input,
+      .list-form-group select {
+        height: 34px;
+
+        padding: 0 6px;
+
+        border-radius: 5px;
+
+        font-size: 8px;
+      }
+
+      .list-form-group textarea {
+        min-height: 70px;
+
+        padding: 6px;
+
+        border-radius: 5px;
+
+        font-size: 8px;
+      }
+
+      /* DRIVING */
+
+      .driving-section {
+        padding: 9px;
+      }
+
+      .driving-section-title {
+        font-size: 8px;
+      }
+
+      .driving-help {
+        margin-bottom: 8px;
+
+        font-size: 7px;
+      }
+
+      .drive-choice-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+
+        gap: 4px;
+      }
+
+      .drive-choice label {
+        min-height: 50px;
+
+        padding: 5px;
+
+        border-radius: 5px;
+      }
+
+      .drive-choice label strong {
+        font-size: 7px;
+      }
+
+      .drive-choice label span {
+        font-size: 5.5px;
+      }
+
+      /* RATES */
+
+      .rate-grid {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 5px;
+
+        margin-top: 7px;
+      }
+
+      .rate-field small {
+        font-size: 6px;
+      }
+
+      /* PHOTOS */
+
+      .photo-upload-box {
+        padding: 9px 5px;
+      }
+
+      .photo-upload-box input {
+        width: 100%;
+
+        font-size: 7px;
+      }
+
+      .photo-upload-box p {
+        font-size: 6px;
+      }
+
+      .photo-preview-grid {
+        gap: 4px;
+      }
+
+      .photo-preview-grid img {
+        height: 45px;
+
+        border-radius: 4px;
+      }
+
+      /* BUTTONS */
+
+      .list-form-actions {
+        gap: 4px;
+      }
+
+      .list-submit {
+        min-height: 34px;
+
+        padding: 0 9px;
+
+        border-radius: 5px;
+
+        font-size: 8px;
+      }
+
+      .list-form-actions .btn {
+        min-height: 34px;
+
+        padding: 0 9px;
+
+        font-size: 8px;
+      }
+
+      .list-message {
+        padding: 8px;
+
+        font-size: 7px;
+      }
+    }
+
+    /* =========================================================
+       VERY SMALL PHONES
+       ========================================================= */
+
+    @media (max-width: 420px) {
+
+      .list-car-layout {
+        width: 95%;
+
+        gap: 7px;
+      }
+
+      .list-car-info {
+        padding: 13px 9px;
+      }
+
+      .list-car-info h1 {
+        font-size: 20px;
+      }
+
+      .list-car-info > p {
+        font-size: 7px;
+      }
+
+      .owner-benefits li {
+        font-size: 7px;
+      }
+
+      .list-car-form-card {
+        padding: 10px 7px;
+      }
+
+      .list-car-form-header h2 {
+        font-size: 14px;
+      }
+
+      .list-form-group input,
+      .list-form-group select {
+        height: 31px;
+
+        font-size: 7px;
+      }
+
+      .list-form-group textarea {
+        min-height: 62px;
+
+        font-size: 7px;
+      }
+
+      .drive-choice label {
+        min-height: 45px;
+      }
+
+      .drive-choice label strong {
+        font-size: 6px;
+      }
+
+      .drive-choice label span {
+        font-size: 5px;
+      }
+
+      .photo-preview-grid img {
+        height: 38px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================================================
+       HEADER
+       ========================================================= -->
+
+  <header class="nav">
+
+    <a class="brand" href="index.html">
+      <img
+        src="drivelink_logo_transparent.png"
+        alt="DriveLink Int’l"
+      >
+    </a>
+
+    <nav class="main-nav">
+
+      <a href="index.html">Home</a>
+
+      <a href="vehicles.html">Find a Car</a>
+
+      <a
+        href="list-your-car.html"
+        aria-current="page"
+      >
+        List Your Car
+      </a>
+
+      <a href="how-it-works.html">
+        How It Works
+      </a>
+
+      <a href="contact.html">
+        Contact
+      </a>
+
+    </nav>
+
+    <a
+      class="nav-book"
+      href="booking.html"
+    >
+      Book Now
+    </a>
+
+  </header>
+
+
+  <!-- =========================================================
+       MAIN
+       ========================================================= -->
+
+  <main>
+
+    <section class="list-car-page">
+
+      <div class="list-car-layout">
+
+
+        <!-- =====================================================
+             LEFT INFORMATION
+             ===================================================== -->
+
+        <div class="list-car-info">
+
+          <h1>
+            List Your <span>Car</span>
+          </h1>
+
+          <p>
+            Turn your vehicle into an income-generating asset.
+            List it on DriveLink Int’l and connect with customers
+            looking for reliable rental vehicles.
+          </p>
+
+          <ul class="owner-benefits">
+
+            <li>
+              Reach customers looking for rental vehicles.
+            </li>
+
+            <li>
+              Choose self-drive, driver service, or both.
+            </li>
+
+            <li>
+              Set your preferred rental rates.
+            </li>
+
+            <li>
+              Upload up to four vehicle photos.
+            </li>
+
+            <li>
+              Get your vehicle reviewed before publication.
+            </li>
+
+          </ul>
+
+          <div class="owner-note">
+
+            <strong>
+              How it works
+            </strong>
+
+            <p>
+              Submit your vehicle details. Our team reviews
+              your listing, and approved vehicles can then
+              appear on DriveLink Int’l for customers to book.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             RIGHT FORM
+             ===================================================== -->
+
+        <div class="list-car-form-card">
+
+          <div class="list-car-form-header">
+
+            <h2>
+              Vehicle Information
+            </h2>
+
+            <p>
+              Complete the form below to submit your vehicle.
+              Fields marked * are required.
+            </p>
+
+          </div>
+
+
+          <!-- FORM MESSAGE -->
+
+          <div
+            id="formMessage"
+            class="list-message"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+
+          <!-- ===================================================
+               VEHICLE FORM
+               =================================================== -->
+
+          <form
+            id="vehicleForm"
+            action="/api/vehicles"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+
+
+            <div class="list-form-grid">
+
+
+              <!-- OWNER NAME -->
+
+              <div class="list-form-group">
+
+                <label for="owner_name">
+                  Owner Name *
+                </label>
+
+                <input
+                  type="text"
+                  id="owner_name"
+                  name="owner_name"
+                  placeholder="Full name"
+                  autocomplete="name"
+                  required
+                >
+
+              </div>
+
+
+              <!-- PHONE -->
+
+              <div class="list-form-group">
+
+                <label for="owner_phone">
+                  Phone *
+                </label>
+
+                <input
+                  type="tel"
+                  id="owner_phone"
+                  name="owner_phone"
+                  placeholder="07XXXXXXXX"
+                  autocomplete="tel"
+                  required
+                >
+
+              </div>
+
+
+              <!-- EMAIL -->
+
+              <div class="list-form-group">
+
+                <label for="owner_email">
+                  Email
+                </label>
+
+                <input
+                  type="email"
+                  id="owner_email"
+                  name="owner_email"
+                  placeholder="Email address"
+                  autocomplete="email"
+                >
+
+              </div>
+
+
+              <!-- VEHICLE MAKE -->
+
+              <div class="list-form-group">
+
+                <label for="vehicle_make">
+                  Make *
+                </label>
+
+                <input
+                  type="text"
+                  id="vehicle_make"
+                  name="vehicle_make"
+                  placeholder="Toyota"
+                  required
+                >
+
+              </div>
+
+
+              <!-- VEHICLE MODEL -->
+
+              <div class="list-form-group">
+
+                <label for="vehicle_model">
+                  Model *
+                </label>
+
+                <input
+                  type="text"
+                  id="vehicle_model"
+                  name="vehicle_model"
+                  placeholder="Fielder"
+                  required
+                >
+
+              </div>
+
+
+              <!-- VEHICLE TYPE -->
+
+              <div class="list-form-group">
+
+                <label for="vehicle_type">
+                  Vehicle Type *
+                </label>
+
+                <select
+                  id="vehicle_type"
+                  name="vehicle_type"
+                  required
+                >
+
+                  <option value="">
+                    Select type
+                  </option>
+
+                  <option value="Economy">
+                    Economy
+                  </option>
+
+                  <option value="Sedan">
+                    Sedan
+                  </option>
+
+                  <option value="SUV">
+                    SUV
+                  </option>
+
+                  <option value="4x4">
+                    4×4
+                  </option>
+
+                  <option value="Luxury">
+                    Luxury
+                  </option>
+
+                  <option value="Van">
+                    Van
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <!-- YEAR -->
+
+              <div class="list-form-group">
+
+                <label for="year">
+                  Year *
+                </label>
+
+                <input
+                  type="number"
+                  id="year"
+                  name="year"
+                  placeholder="2022"
+                  min="1900"
+                  max="2100"
+                  required
+                >
+
+              </div>
+
+
+              <!-- REGISTRATION -->
+
+              <div class="list-form-group">
+
+                <label for="registration_number">
+                  Registration (optional)
+                </label>
+
+                <input
+                  type="text"
+                  id="registration_number"
+                  name="registration_number"
+                  placeholder="KXX 123X"
+                >
+
+              </div>
+
+
+              <!-- LOCATION -->
+
+              <div class="list-form-group">
+
+                <label for="location">
+                  Location *
+                </label>
+
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  placeholder="Nairobi"
+                  required
+                >
+
+              </div>
+
+
+              <!-- ZIP -->
+
+              <div class="list-form-group">
+
+                <label for="zip_code">
+                  ZIP / Postal Code
+                </label>
+
+                <input
+                  type="text"
+                  id="zip_code"
+                  name="zip_code"
+                  placeholder="00100"
+                >
+
+              </div>
+
+
+              <!-- TRANSMISSION -->
+
+              <div class="list-form-group">
+
+                <label for="transmission">
+                  Transmission
+                </label>
+
+                <select
+                  id="transmission"
+                  name="transmission"
+                >
+
+                  <option value="">
+                    Select
+                  </option>
+
+                  <option value="Automatic">
+                    Automatic
+                  </option>
+
+                  <option value="Manual">
+                    Manual
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <!-- FUEL -->
+
+              <div class="list-form-group">
+
+                <label for="fuel_type">
+                  Fuel Type
+                </label>
+
+                <select
+                  id="fuel_type"
+                  name="fuel_type"
+                >
+
+                  <option value="">
+                    Select
+                  </option>
+
+                  <option value="Petrol">
+                    Petrol
+                  </option>
+
+                  <option value="Diesel">
+                    Diesel
+                  </option>
+
+                  <option value="Hybrid">
+                    Hybrid
+                  </option>
+
+                  <option value="Electric">
+                    Electric
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <!-- SEATS -->
+
+              <div class="list-form-group">
+
+                <label for="seats">
+                  Seats
+                </label>
+
+                <input
+                  type="number"
+                  id="seats"
+                  name="seats"
+                  placeholder="5"
+                  min="1"
+                  max="100"
+                >
+
+              </div>
+
+
+              <!-- =================================================
+                   DRIVING OPTION
+                   ================================================= -->
+
+              <div class="list-form-group full">
+
+                <div class="driving-section">
+
+                  <p class="driving-section-title">
+                    Driving Option *
+                  </p>
+
+                  <p class="driving-help">
+                    Choose how customers can hire this vehicle.
+                  </p>
+
+
+                  <div class="drive-choice-grid">
+
+
+                    <!-- SELF DRIVE -->
+
+                    <div class="drive-choice">
+
+                      <input
+                        type="radio"
+                        id="self_drive"
+                        name="driving_option"
+                        value="self_drive"
+                        required
+                      >
+
+                      <label for="self_drive">
+
+                        <strong>
+                          Self Drive
+                        </strong>
+
+                        <span>
+                          Customer drives the vehicle.
+                        </span>
+
+                      </label>
+
+                    </div>
+
+
+                    <!-- WITH DRIVER -->
+
+                    <div class="drive-choice">
+
+                      <input
+                        type="radio"
+                        id="with_driver"
+                        name="driving_option"
+                        value="with_driver"
+                      >
+
+                      <label for="with_driver">
+
+                        <strong>
+                          With Driver
+                        </strong>
+
+                        <span>
+                          Vehicle comes with a driver.
+                        </span>
+
+                      </label>
+
+                    </div>
+
+
+                    <!-- BOTH -->
+
+                    <div class="drive-choice">
+
+                      <input
+                        type="radio"
+                        id="both_available"
+                        name="driving_option"
+                        value="both"
+                      >
+
+                      <label for="both_available">
+
+                        <strong>
+                          Both Available
+                        </strong>
+
+                        <span>
+                          Customer can choose either.
+                        </span>
+
+                      </label>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- RATES -->
+
+                  <div class="rate-grid">
+
+
+                    <!-- SELF DRIVE RATE -->
+
+                    <div
+                      class="rate-field is-hidden"
+                      id="selfDriveRateField"
+                    >
+
+                      <label for="daily_price">
+                        Self-Drive Daily Rate (KSh)
+                      </label>
+
+                      <input
+                        type="number"
+                        id="daily_price"
+                        name="daily_price"
+                        min="0"
+                        step="1"
+                        placeholder="5000"
+                      >
+
+                      <small>
+                        Daily price when the customer drives.
+                      </small>
+
+                    </div>
+
+
+                    <!-- DRIVER RATE -->
+
+                    <div
+                      class="rate-field is-hidden"
+                      id="driverRateField"
+                    >
+
+                      <label for="driver_rate">
+                        With-Driver Daily Rate (KSh)
+                      </label>
+
+                      <input
+                        type="number"
+                        id="driver_rate"
+                        name="driver_rate"
+                        min="0"
+                        step="1"
+                        placeholder="8000"
+                      >
+
+                      <small>
+                        Daily price when a driver is provided.
+                      </small>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- =================================================
+                   DESCRIPTION
+                   ================================================= -->
+
+              <div class="list-form-group full">
+
+                <label for="description">
+                  Vehicle Description
+                </label>
+
+                <textarea
+                  id="description"
+                  name="description"
+                  placeholder="Describe the vehicle, condition, features and anything customers should know."
+                ></textarea>
+
+              </div>
+
+
+              <!-- =================================================
+                   PHOTOS
+                   ================================================= -->
+
+              <div class="list-form-group full">
+
+                <label for="vehicle_photos">
+                  Vehicle Photos *
+                </label>
+
+                <div class="photo-upload-box">
+
+                  <input
+                    type="file"
+                    id="vehicle_photos"
+                    name="vehicle_photos"
+                    accept="image/jpeg,image/png,image/webp,image/*"
+                    multiple
+                    required
+                  >
+
+                  <p>
+                    Select up to 4 clear vehicle photos.
+                    Maximum 4 photos.
+                  </p>
+
+                </div>
+
+                <div
+                  id="photoPreview"
+                  class="photo-preview-grid"
+                ></div>
+
+              </div>
+
+
+              <!-- =================================================
+                   SUBMIT
+                   ================================================= -->
+
+              <div class="list-form-group full">
+
+                <div class="list-form-actions">
+
+                  <button
+                    type="submit"
+                    id="submitButton"
+                    class="list-submit"
+                  >
+                    Submit Vehicle
+                  </button>
+
+                  <a
+                    href="vehicles.html"
+                    class="btn btn-light"
+                  >
+                    View Vehicles
+                  </a>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       FOOTER
+       ========================================================= -->
+
+  <footer class="footer">
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+
+        <div class="footer-brand">
+
+          <img
+            src="drivelink_logo_transparent.png"
+            alt="DriveLink Int’l"
+          >
+
+          <p>
+            DriveLink Int’l connects vehicle owners with
+            customers looking for convenient and reliable
+            car rental services in Kenya.
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <h3>
+            DriveLink
+          </h3>
+
+          <div class="footer-links">
+
+            <a href="index.html">
+              Home
+            </a>
+
+            <a href="vehicles.html">
+              Find a Car
+            </a>
+
+            <a href="list-your-car.html">
+              List Your Car
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <h3>
+            Information
+          </h3>
+
+          <div class="footer-links">
+
+            <a href="how-it-works.html">
+              How It Works
+            </a>
+
+            <a href="booking.html">
+              Book Now
+            </a>
+
+            <a href="contact.html">
+              Contact
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <h3>
+            Owners
+          </h3>
+
+          <div class="footer-links">
+
+            <a href="list-your-car.html">
+              List Your Car
+            </a>
+
+            <a href="contact.html">
+              Get in Touch
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        © 2026 DriveLink Int’l. All rights reserved.
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
+
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+      /* =======================================================
+         ELEMENTS
+         ======================================================= */
+
+      const form =
+        document.getElementById("vehicleForm");
+
+      const formMessage =
+        document.getElementById("formMessage");
+
+      const submitButton =
+        document.getElementById("submitButton");
+
+      const photoInput =
+        document.getElementById("vehicle_photos");
+
+      const photoPreview =
+        document.getElementById("photoPreview");
+
+      const selfDriveRateField =
+        document.getElementById("selfDriveRateField");
+
+      const driverRateField =
+        document.getElementById("driverRateField");
+
+      const dailyPrice =
+        document.getElementById("daily_price");
+
+      const driverRate =
+        document.getElementById("driver_rate");
+
+
+      /* =======================================================
+         DRIVING OPTION
+         ======================================================= */
+
+      function getDrivingOption() {
+
+        const selected =
+          document.querySelector(
+            'input[name="driving_option"]:checked'
+          );
+
+        return selected
+          ? selected.value
+          : "";
+
+      }
+
+
+      function updateRates() {
+
+        const option =
+          getDrivingOption();
+
+        const needsSelfDrive =
+          option === "self_drive" ||
+          option === "both";
+
+        const needsDriver =
+          option === "with_driver" ||
+          option === "both";
+
+
+        /* SELF DRIVE */
+
+        selfDriveRateField.classList.toggle(
+          "is-hidden",
+          !needsSelfDrive
+        );
+
+        dailyPrice.required =
+          needsSelfDrive;
+
+
+        /* DRIVER */
+
+        driverRateField.classList.toggle(
+          "is-hidden",
+          !needsDriver
+        );
+
+        driverRate.required =
+          needsDriver;
+
+
+        /* CLEAR UNUSED RATES */
+
+        if (!needsSelfDrive) {
+          dailyPrice.value = "";
+        }
+
+        if (!needsDriver) {
+          driverRate.value = "";
+        }
+
+      }
+
+
+      document
+        .querySelectorAll(
+          'input[name="driving_option"]'
+        )
+        .forEach(function (radio) {
+
+          radio.addEventListener(
+            "change",
+            updateRates
+          );
+
+        });
+
+
+      updateRates();
+
+
+      /* =======================================================
+         PHOTO PREVIEW
+         ======================================================= */
+
+      photoInput.addEventListener(
+        "change",
+        function () {
+
+          photoPreview.innerHTML = "";
+
+          const files =
+            Array.from(this.files);
+
+
+          /* MAXIMUM 4 */
+
+          if (files.length > 4) {
+
+            alert(
+              "Please select a maximum of 4 vehicle photos."
+            );
+
+            this.value = "";
+
+            return;
+
+          }
+
+
+          files.forEach(function (file) {
+
+            if (
+              !file.type.startsWith("image/")
+            ) {
+              return;
+            }
+
+
+            const reader =
+              new FileReader();
+
+
+            reader.onload =
+              function (event) {
+
+                const image =
+                  document.createElement("img");
+
+                image.src =
+                  event.target.result;
+
+                image.alt =
+                  "Vehicle photo preview";
+
+                photoPreview.appendChild(
+                  image
+                );
+
+              };
+
+
+            reader.readAsDataURL(file);
+
+          });
+
+        }
+      );
+
+
+      /* =======================================================
+         FORM SUBMISSION
+         ======================================================= */
+
+      form.addEventListener(
+        "submit",
+        async function (event) {
+
+          event.preventDefault();
+
+
+          formMessage.className =
+            "list-message";
+
+          formMessage.innerHTML = "";
+
+          formMessage.style.display =
+            "none";
+
+
+          /* CHECK DRIVING OPTION */
+
+          const option =
+            getDrivingOption();
+
+          if (!option) {
+
+            formMessage.className =
+              "list-message error";
+
+            formMessage.textContent =
+              "Please select a driving option.";
+
+            return;
+
+          }
+
+
+          /* CHECK PHOTOS */
+
+          if (
+            photoInput.files.length === 0
+          ) {
+
+            formMessage.className =
+              "list-message error";
+
+            formMessage.textContent =
+              "Please upload at least one vehicle photo.";
+
+            return;
+
+          }
+
+
+          if (
+            photoInput.files.length > 4
+          ) {
+
+            formMessage.className =
+              "list-message error";
+
+            formMessage.textContent =
+              "You can upload a maximum of 4 vehicle photos.";
+
+            return;
+
+          }
+
+
+          /* SUBMITTING */
+
+          submitButton.disabled =
+            true;
+
+          submitButton.textContent =
+            "Submitting...";
+
+
+          try {
+
+            const formData =
+              new FormData(form);
+
+
+            const response =
+              await fetch(
+                "/api/vehicles",
+                {
+                  method: "POST",
+                  body: formData
+                }
+              );
+
+
+            let data = {};
+
+            const contentType =
+              response.headers.get(
+                "content-type"
+              ) || "";
+
+
+            if (
+              contentType.includes(
+                "application/json"
+              )
+            ) {
+
+              try {
+
+                data =
+                  await response.json();
+
+              } catch (jsonError) {
+
+                data = {};
+
+              }
+
+            }
+
+
+            if (!response.ok) {
+
+              throw new Error(
+                data.message ||
+                data.error ||
+                "Unable to submit vehicle. Please try again."
+              );
+
+            }
+
+
+            /* SUCCESS */
+
+            formMessage.className =
+              "list-message success";
+
+            formMessage.innerHTML =
+              "Your vehicle has been submitted successfully. " +
+              "It will be reviewed before appearing on DriveLink Int’l.";
+
+
+            form.reset();
+
+            photoPreview.innerHTML =
+              "";
+
+            updateRates();
+
+
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+
+
+          } catch (error) {
+
+            formMessage.className =
+              "list-message error";
+
+            formMessage.textContent =
+              error.message ||
+              "Something went wrong. Please try again.";
+
+          } finally {
+
+            submitButton.disabled =
+              false;
+
+            submitButton.textContent =
+              "Submit Vehicle";
+
+          }
+
+        }
+      );
+
+    });
+
+  </script>
+
+</body>
+</html>

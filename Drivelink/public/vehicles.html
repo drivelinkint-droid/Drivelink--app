@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Find a Car — DriveLink Int’l</title>
+
+  <meta
+    name="description"
+    content="Find and book approved vehicles from trusted owners through DriveLink Int’l."
+  >
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .page-hero {
+      background: var(--dark);
+      color: var(--white);
+      padding: 65px 0;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(36px, 5vw, 54px);
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+
+    .page-hero p {
+      max-width: 650px;
+      color: rgba(255,255,255,.72);
+    }
+
+    .vehicle-toolbar {
+      display: grid;
+      grid-template-columns: 1fr 1fr 180px;
+      gap: 12px;
+      margin-bottom: 35px;
+    }
+
+    .vehicle-toolbar input,
+    .vehicle-toolbar select {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 13px;
+      outline: none;
+      background: var(--white);
+    }
+
+    .vehicle-toolbar input:focus,
+    .vehicle-toolbar select:focus {
+      border-color: var(--gold);
+    }
+
+    .results-count {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .vehicle-card-link {
+      display: block;
+    }
+
+    @media (max-width: 800px) {
+      .vehicle-toolbar {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+
+    <a href="index.html" class="brand">
+      <img
+        src="drivelink_logo_transparent.png"
+        alt="DriveLink Int’l"
+        class="brand-logo"
+      >
+    </a>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="vehicles.html" class="active">Find a Car</a>
+      <a href="list-your-car.html">List Your Car</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="container">
+
+      <span class="eyebrow">DRIVELINK VEHICLES</span>
+
+      <h1>Find your next car.</h1>
+
+      <p>
+        Browse approved vehicles available through
+        DriveLink Int’l and choose the one that fits
+        your journey.
+      </p>
+
+    </div>
+  </section>
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="vehicle-toolbar">
+
+        <input
+          type="search"
+          id="searchInput"
+          placeholder="Search make, model or location..."
+          aria-label="Search vehicles"
+        >
+
+        <select id="transmissionFilter">
+          <option value="">All transmissions</option>
+          <option value="automatic">Automatic</option>
+          <option value="manual">Manual</option>
+        </select>
+
+        <button
+          type="button"
+          id="clearFilters"
+          class="btn btn-primary"
+        >
+          Clear Filters
+        </button>
+
+      </div>
+
+      <div id="resultsCount" class="results-count">
+        Loading vehicles...
+      </div>
+
+      <div
+        id="vehiclesGrid"
+        class="vehicle-grid"
+      >
+        <div class="loading-message">
+          Loading available vehicles...
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="site-footer">
+
+  <div class="container footer-grid">
+
+    <div>
+
+      <a href="index.html" class="brand footer-brand">
+        <img
+          src="drivelink_logo_transparent.png"
+          alt="DriveLink Int’l"
+          class="brand-logo"
+        >
+      </a>
+
+      <p>
+        A vehicle rental marketplace connecting
+        customers with trusted vehicle owners.
+      </p>
+
+    </div>
+
+    <div>
+
+      <h3>Quick Links</h3>
+
+      <a href="index.html">Home</a>
+      <a href="vehicles.html">Find a Car</a>
+      <a href="list-your-car.html">List Your Car</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="contact.html">Contact</a>
+
+    </div>
+
+    <div>
+
+      <h3>Contact</h3>
+
+      <p>
+        Have a question about a vehicle or booking?
+      </p>
+
+      <a href="mailto:drivelinkint@gmail.com">
+        drivelinkint@gmail.com
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+
+    <div class="container">
+
+      <p>
+        © 2026 DriveLink Int’l. All rights reserved.
+      </p>
+
+    </div>
+
+  </div>
+
+</footer>
+
+<script>
+
+let allVehicles = [];
+
+const grid =
+  document.getElementById("vehiclesGrid");
+
+const searchInput =
+  document.getElementById("searchInput");
+
+const transmissionFilter =
+  document.getElementById("transmissionFilter");
+
+const clearFilters =
+  document.getElementById("clearFilters");
+
+const resultsCount =
+  document.getElementById("resultsCount");
+
+
+async function loadVehicles() {
+
+  try {
+
+    const response =
+      await fetch("/api/public/vehicles");
+
+    if (!response.ok) {
+      throw new Error(
+        "Unable to load vehicles"
+      );
+    }
+
+    const data =
+      await response.json();
+
+    allVehicles =
+      Array.isArray(data.vehicles)
+        ? data.vehicles
+        : [];
+
+    renderVehicles();
+
+  } catch (error) {
+
+    console.error(error);
+
+    resultsCount.textContent =
+      "Unable to load vehicles.";
+
+    grid.innerHTML = `
+      <div class="empty-message">
+
+        <h3>Vehicles temporarily unavailable</h3>
+
+        <p>
+          Please try again shortly.
+        </p>
+
+      </div>
+    `;
+
+  }
+
+}
+
+
+function renderVehicles() {
+
+  const search =
+    searchInput.value
+      .trim()
+      .toLowerCase();
+
+  const transmission =
+    transmissionFilter.value
+      .trim()
+      .toLowerCase();
+
+  const filtered =
+    allVehicles.filter(vehicle => {
+
+      const searchable = [
+        vehicle.vehicle_make,
+        vehicle.vehicle_model,
+        vehicle.location,
+        vehicle.description
+      ]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase();
+
+      const matchesSearch =
+        !search ||
+        searchable.includes(search);
+
+      const vehicleTransmission =
+        String(
+          vehicle.transmission || ""
+        ).toLowerCase();
+
+      const matchesTransmission =
+        !transmission ||
+        vehicleTransmission === transmission;
+
+      return (
+        matchesSearch &&
+        matchesTransmission
+      );
+
+    });
+
+  resultsCount.textContent =
+    `${filtered.length} vehicle${filtered.length === 1 ? "" : "s"} available`;
+
+  if (!filtered.length) {
+
+    grid.innerHTML = `
+      <div class="empty-message">
+
+        <h3>No matching vehicles</h3>
+
+        <p>
+          Try changing your search or filters.
+        </p>
+
+      </div>
+    `;
+
+    return;
+  }
+
+  grid.innerHTML =
+    filtered
+      .map(createVehicleCard)
+      .join("");
+
+}
+
+
+function createVehicleCard(vehicle) {
+
+  const image =
+    vehicle.images &&
+    vehicle.images.length
+      ? vehicle.images[0]
+      : "vehicle-background.jpg";
+
+  const price =
+    Number(
+      vehicle.daily_price || 0
+    ).toLocaleString();
+
+  const title =
+    `${vehicle.vehicle_make || ""} ${vehicle.vehicle_model || ""}`
+      .trim();
+
+  return `
+
+    <article class="vehicle-card">
+
+      <div class="vehicle-image-wrap">
+
+        <img
+          src="${escapeHtml(image)}"
+          alt="${escapeHtml(title)}"
+          class="vehicle-image"
+          loading="lazy"
+          onerror="this.src='vehicle-background.jpg'"
+        >
+
+      </div>
+
+      <div class="vehicle-card-body">
+
+        <div class="vehicle-card-top">
+
+          <div>
+
+            <h3>
+              ${escapeHtml(title || "Vehicle")}
+            </h3>
+
+            <p class="vehicle-location">
+              ${escapeHtml(
+                vehicle.location ||
+                "Location available on request"
+              )}
+            </p>
+
+          </div>
+
+          <div class="vehicle-price">
+
+            <strong>
+              KSh ${price}
+            </strong>
+
+            <span>/ day</span>
+
+          </div>
+
+        </div>
+
+        <div class="vehicle-meta">
+
+          <span>
+            ${escapeHtml(
+              vehicle.transmission ||
+              "Transmission"
+            )}
+          </span>
+
+          <span>
+            ${escapeHtml(
+              vehicle.fuel_type ||
+              "Fuel"
+            )}
+          </span>
+
+          <span>
+            ${escapeHtml(
+              vehicle.seats ||
+              "—"
+            )} seats
+          </span>
+
+        </div>
+
+        <a
+          href="booking.html?vehicle_id=${encodeURIComponent(vehicle.id)}"
+          class="btn btn-primary btn-full"
+        >
+          Book Vehicle
+        </a>
+
+      </div>
+
+    </article>
+
+  `;
+
+}
+
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+searchInput.addEventListener(
+  "input",
+  renderVehicles
+);
+
+transmissionFilter.addEventListener(
+  "change",
+  renderVehicles
+);
+
+clearFilters.addEventListener(
+  "click",
+  () => {
+
+    searchInput.value = "";
+    transmissionFilter.value = "";
+
+    renderVehicles();
+
+  }
+);
+
+
+loadVehicles();
+
+</script>
+
+</body>
+</html>
+
+
+

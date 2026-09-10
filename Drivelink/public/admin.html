@@ -1,0 +1,2814 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DriveLink Int’l — Admin Dashboard</title>
+<meta name="description" content="DriveLink Int’l administration and management dashboard."><style>
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#f4f6f8;
+  color:#17202a;
+}
+
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+
+header{
+  background:#111820;
+  color:#fff;
+  padding:16px 24px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  box-shadow:0 3px 15px rgba(0,0,0,.15);
+}
+
+.header-inner{
+  max-width:1500px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.brand img{
+  width:48px;
+  height:48px;
+  object-fit:contain;
+  border-radius:8px;
+  background:#fff;
+}
+
+.brand-text strong{
+  display:block;
+  font-size:20px;
+}
+
+.brand-text span{
+  display:block;
+  font-size:12px;
+  opacity:.7;
+  margin-top:2px;
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.header-btn{
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  padding:10px 14px;
+  border-radius:8px;
+  font-weight:700;
+}
+
+.header-btn:hover{
+  background:rgba(255,255,255,.16);
+}
+
+/* LOGIN */
+
+#loginScreen{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+  background:
+    linear-gradient(rgba(17,24,32,.92),rgba(17,24,32,.92)),
+    url("vehicle-background.jpg") center/cover;
+}
+
+.login-card{
+  width:100%;
+  max-width:430px;
+  background:#fff;
+  border-radius:18px;
+  padding:32px;
+  box-shadow:0 25px 60px rgba(0,0,0,.3);
+}
+
+.login-logo{
+  width:80px;
+  height:80px;
+  object-fit:contain;
+  display:block;
+  margin:0 auto 18px;
+}
+
+.login-card h1{
+  text-align:center;
+  margin:0;
+  font-size:27px;
+}
+
+.login-card p{
+  text-align:center;
+  color:#68727d;
+  margin:8px 0 25px;
+}
+
+.form-group{margin-bottom:16px}
+
+.form-group label{
+  display:block;
+  font-weight:700;
+  margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width:100%;
+  border:1px solid #d8dde3;
+  border-radius:9px;
+  padding:12px 13px;
+  outline:none;
+  background:#fff;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color:#111820;
+  box-shadow:0 0 0 3px rgba(17,24,32,.08);
+}
+
+.login-btn{
+  width:100%;
+  border:0;
+  border-radius:9px;
+  padding:13px;
+  background:#111820;
+  color:#fff;
+  font-weight:800;
+}
+
+.login-btn:hover{background:#202b35}
+
+.login-error{
+  color:#b42318;
+  background:#fef3f2;
+  border:1px solid #fecdca;
+  padding:10px;
+  border-radius:8px;
+  margin-bottom:15px;
+  display:none;
+}
+
+/* APP */
+
+#adminApp{display:none}
+
+main{
+  max-width:1500px;
+  margin:auto;
+  padding:28px 22px 60px;
+}
+
+.page-title{margin-bottom:22px}
+
+.page-title h1{
+  margin:0;
+  font-size:30px;
+}
+
+.page-title p{
+  margin:6px 0 0;
+  color:#68727d;
+}
+
+/* ALERT */
+
+#alertBox{
+  display:none;
+  margin-bottom:20px;
+  padding:13px 16px;
+  border-radius:10px;
+  font-weight:700;
+}
+
+#alertBox.success{
+  display:block;
+  background:#ecfdf3;
+  color:#067647;
+  border:1px solid #abefc6;
+}
+
+#alertBox.error{
+  display:block;
+  background:#fef3f2;
+  color:#b42318;
+  border:1px solid #fecdca;
+}
+
+/* STATS */
+
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:15px;
+  margin-bottom:28px;
+}
+
+.stat-card{
+  background:#fff;
+  border:1px solid #e2e6ea;
+  border-radius:13px;
+  padding:20px;
+  box-shadow:0 4px 15px rgba(0,0,0,.04);
+}
+
+.stat-card span{
+  display:block;
+  color:#68727d;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.stat-card strong{
+  font-size:28px;
+  display:block;
+}
+
+/* TABS */
+
+.tabs{
+  background:#fff;
+  border:1px solid #e2e6ea;
+  border-radius:12px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+  padding:6px;
+  margin-bottom:22px;
+}
+
+.tab-btn{
+  border:0;
+  background:transparent;
+  padding:11px 15px;
+  border-radius:8px;
+  font-weight:800;
+  color:#52606d;
+}
+
+.tab-btn:hover{
+  background:#f0f2f4;
+  color:#111820;
+}
+
+.tab-btn.active{
+  background:#111820;
+  color:#fff;
+}
+
+/* SECTIONS */
+
+.section{display:none}
+.section.active{display:block}
+
+.panel{
+  background:#fff;
+  border:1px solid #e2e6ea;
+  border-radius:13px;
+  margin-bottom:22px;
+  overflow:hidden;
+  box-shadow:0 4px 15px rgba(0,0,0,.04);
+}
+
+.panel-header{
+  padding:18px 20px;
+  border-bottom:1px solid #e6e9ed;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.panel-header h2{
+  margin:0;
+  font-size:20px;
+}
+
+.panel-header p{
+  margin:4px 0 0;
+  color:#68727d;
+  font-size:13px;
+}
+
+.panel-body{padding:20px}
+
+/* BUTTONS */
+
+.btn{
+  border:0;
+  border-radius:8px;
+  padding:9px 13px;
+  font-weight:800;
+  background:#111820;
+  color:#fff;
+}
+
+.btn:hover{opacity:.9}
+
+.btn-secondary{
+  background:#e9edf0;
+  color:#17202a;
+}
+
+.btn-success{
+  background:#087443;
+  color:#fff;
+}
+
+.btn-warning{
+  background:#b54708;
+  color:#fff;
+}
+
+.btn-danger{
+  background:#b42318;
+  color:#fff;
+}
+
+.btn-small{
+  padding:7px 10px;
+  font-size:12px;
+}
+
+/* TABLES */
+
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1100px;
+}
+
+th,td{
+  text-align:left;
+  padding:13px 12px;
+  border-bottom:1px solid #edf0f2;
+  vertical-align:top;
+}
+
+th{
+  background:#f7f8f9;
+  color:#46515c;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  white-space:nowrap;
+}
+
+td{
+  font-size:13px;
+}
+
+tr:hover td{background:#fafbfc}
+
+.empty{
+  text-align:center;
+  padding:40px 20px;
+  color:#68727d;
+}
+
+/* STATUS */
+
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+
+.badge-pending,
+.badge-new{
+  background:#fff4e5;
+  color:#9a3412;
+}
+
+.badge-approved,
+.badge-confirmed,
+.badge-paid,
+.badge-replied{
+  background:#ecfdf3;
+  color:#067647;
+}
+
+.badge-rejected,
+.badge-failed,
+.badge-cancelled{
+  background:#fef3f2;
+  color:#b42318;
+}
+
+.badge-read{
+  background:#eef4ff;
+  color:#175cd3;
+}
+
+.badge-closed,
+.badge-completed{
+  background:#f2f4f7;
+  color:#344054;
+}
+
+/* VEHICLE IMAGE */
+
+.vehicle-thumb{
+  width:82px;
+  height:58px;
+  object-fit:cover;
+  border-radius:7px;
+  background:#edf0f2;
+  display:block;
+  margin-bottom:7px;
+}
+
+.no-image{
+  width:82px;
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#edf0f2;
+  border-radius:7px;
+  font-size:10px;
+  color:#68727d;
+  margin-bottom:7px;
+}
+
+.message-cell{
+  max-width:400px;
+  min-width:220px;
+  white-space:pre-wrap;
+  word-break:break-word;
+  line-height:1.5;
+}
+
+.contact-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:5px;
+}
+
+.actions-cell{
+  min-width:180px;
+}
+
+.small-muted{
+  color:#68727d;
+  font-size:11px;
+}
+
+.amount{
+  white-space:nowrap;
+  font-weight:800;
+}
+
+/* DIAGNOSTICS */
+
+.diagnostic-summary{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.diagnostic-box{
+  border:1px solid #e2e6ea;
+  border-radius:10px;
+  padding:15px;
+  background:#fafbfc;
+}
+
+.diagnostic-box small{
+  display:block;
+  color:#68727d;
+  margin-bottom:5px;
+}
+
+.diagnostic-box strong{font-size:16px}
+
+.diagnostic-ok{color:#067647}
+.diagnostic-error{color:#b42318}
+
+.columns-list{
+  margin:0;
+  padding-left:18px;
+}
+
+.columns-list li{
+  margin-bottom:4px;
+  font-size:12px;
+}
+
+/* MODAL */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  background:rgba(0,0,0,.6);
+  padding:20px;
+  overflow-y:auto;
+}
+
+.modal.open{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-card{
+  width:100%;
+  max-width:750px;
+  background:#fff;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 25px 70px rgba(0,0,0,.3);
+}
+
+.modal-header{
+  padding:17px 20px;
+  border-bottom:1px solid #e6e9ed;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.modal-header h3{margin:0}
+
+.modal-close{
+  border:0;
+  background:transparent;
+  font-size:25px;
+}
+
+.modal-body{
+  padding:20px;
+  line-height:1.6;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+  .stats-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+
+  .diagnostic-summary{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:700px){
+  header{padding:12px 15px}
+
+  .header-inner{align-items:flex-start}
+
+  .brand img{
+    width:40px;
+    height:40px;
+  }
+
+  .brand-text strong{font-size:16px}
+
+  .header-actions .header-btn:first-child{
+    display:none;
+  }
+
+  main{padding:20px 12px 40px}
+
+  .page-title h1{font-size:25px}
+
+  .stats-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .stat-card{padding:15px}
+
+  .stat-card strong{font-size:23px}
+
+  .tabs{
+    overflow-x:auto;
+    flex-wrap:nowrap;
+  }
+
+  .tab-btn{white-space:nowrap}
+
+  .panel-header{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .panel-body{padding:13px}
+
+  .diagnostic-summary{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:430px){
+  .stats-grid{grid-template-columns:1fr}
+
+  .login-card{padding:25px 20px}
+}
+</style></head><body><!-- LOGIN --><section id="loginScreen">
+  <div class="login-card"><img
+  src="drivelink_logo_transparent.png"
+  class="login-logo"
+  alt="DriveLink Int’l"
+  onerror="this.style.display='none'"
+>
+
+<h1>DriveLink Int’l</h1>
+<p>Administration Dashboard</p>
+
+<div id="loginError" class="login-error"></div>
+
+<form id="loginForm">
+
+  <div class="form-group">
+    <label for="adminUser">Username</label>
+    <input
+      type="text"
+      id="adminUser"
+      autocomplete="username"
+      required
+    >
+  </div>
+
+  <div class="form-group">
+    <label for="adminPassword">Password</label>
+    <input
+      type="password"
+      id="adminPassword"
+      autocomplete="current-password"
+      required
+    >
+  </div>
+
+  <button type="submit" class="login-btn">
+    Sign In
+  </button>
+
+</form>
+
+  </div>
+</section><!-- ADMIN --><div id="adminApp"><header>
+  <div class="header-inner"><div class="brand">
+
+  <img
+    src="drivelink_logo_transparent.png"
+    alt="DriveLink Int’l"
+    onerror="this.style.display='none'"
+  >
+
+  <div class="brand-text">
+    <strong>DriveLink Int’l</strong>
+    <span>Administration Portal</span>
+  </div>
+
+</div>
+
+<div class="header-actions">
+
+  <button class="header-btn" onclick="refreshAll()">
+    Refresh
+  </button>
+
+  <button class="header-btn" onclick="logout()">
+    Logout
+  </button>
+
+</div>
+
+  </div>
+</header><main><div class="page-title">
+  <h1>Admin Dashboard</h1>
+  <p>
+    Manage vehicles, bookings, customer messages and monitor
+    the DriveLink database.
+  </p>
+</div><div id="alertBox"></div><!-- STATS --><section class="stats-grid">  <div class="stat-card">
+    <span>Total Vehicles</span>
+    <strong id="statVehicles">0</strong>
+  </div>  <div class="stat-card">
+    <span>Pending Vehicles</span>
+    <strong id="statPendingVehicles">0</strong>
+  </div>  <div class="stat-card">
+    <span>Approved Vehicles</span>
+    <strong id="statApprovedVehicles">0</strong>
+  </div>  <div class="stat-card">
+    <span>Total Bookings</span>
+    <strong id="statBookings">0</strong>
+  </div>  <div class="stat-card">
+    <span>New Messages</span>
+    <strong id="statMessages">0</strong>
+  </div></section><!-- TABS --><nav class="tabs">  <button class="tab-btn active" data-section="dashboard">
+    Dashboard
+  </button>  <button class="tab-btn" data-section="vehicles">
+    Vehicles
+  </button>  <button class="tab-btn" data-section="bookings">
+    Bookings
+  </button>  <button class="tab-btn" data-section="messages">
+    Contact Messages
+  </button>  <button class="tab-btn" data-section="database">
+    Database Diagnostics
+  </button></nav><!-- DASHBOARD --><section id="section-dashboard" class="section active">  <div class="panel"><div class="panel-header">
+
+  <div>
+    <h2>Dashboard Overview</h2>
+    <p>Current DriveLink Int’l system activity.</p>
+  </div>
+
+  <button class="btn" onclick="refreshAll()">
+    Refresh Data
+  </button>
+
+</div>
+
+<div class="panel-body">
+
+  <p>
+    Use the tabs above to manage vehicle listings,
+    customer bookings, contact messages and database diagnostics.
+  </p>
+
+  <p>
+    <strong>System status:</strong>
+    <span id="dashboardStatus">Checking...</span>
+  </p>
+
+</div>
+
+  </div>  <div class="panel"><div class="panel-header">
+  <div>
+    <h2>System Services</h2>
+    <p>Backend service configuration.</p>
+  </div>
+</div>
+
+<div class="panel-body">
+
+  <div class="diagnostic-summary">
+
+    <div class="diagnostic-box">
+      <small>Database</small>
+      <strong id="serviceDatabase">Checking...</strong>
+    </div>
+
+    <div class="diagnostic-box">
+      <small>Gmail</small>
+      <strong id="serviceGmail">Checking...</strong>
+    </div>
+
+    <div class="diagnostic-box">
+      <small>M-PESA</small>
+      <strong id="serviceMpesa">Checking...</strong>
+    </div>
+
+    <div class="diagnostic-box">
+      <small>API</small>
+      <strong id="serviceApi">Checking...</strong>
+    </div>
+
+  </div>
+
+</div>
+
+  </div></section><!-- VEHICLES --><section id="section-vehicles" class="section"><div class="panel"><div class="panel-header">  <div>
+    <h2>Vehicle Listings</h2>
+    <p>
+      Review, approve, reject or delete submitted vehicles.
+    </p>
+  </div>  <button class="btn" onclick="loadVehicles()">
+    Refresh Vehicles
+  </button></div><div class="table-wrap"><table><thead>
+<tr>
+  <th>ID</th>
+  <th>Vehicle</th>
+  <th>Owner</th>
+  <th>Contact</th>
+  <th>Price</th>
+  <th>Location</th>
+  <th>Transmission</th>
+  <th>Fuel</th>
+  <th>Seats</th>
+  <th>Driving</th>
+  <th>Driver Rate</th>
+  <th>Status</th>
+  <th>Created</th>
+  <th>Actions</th>
+</tr>
+</thead><tbody id="vehiclesTable"><tr>
+<td colspan="14" class="empty">
+Loading vehicles...
+</td>
+</tr></tbody></table></div>
+</div>
+</section><!-- BOOKINGS --><section id="section-bookings" class="section"><div class="panel"><div class="panel-header">  <div>
+    <h2>Bookings</h2>
+    <p>
+      Review customer rental requests and update booking status.
+    </p>
+  </div>  <button class="btn" onclick="loadBookings()">
+    Refresh Bookings
+  </button></div><div class="table-wrap"><table><thead>
+<tr>
+  <th>ID</th>
+  <th>Customer</th>
+  <th>Vehicle</th>
+  <th>Vehicle ID</th>
+  <th>Pickup</th>
+  <th>Return</th>
+  <th>Days</th>
+  <th>Daily Price</th>
+  <th>Service Fee</th>
+  <th>Total</th>
+  <th>Payment</th>
+  <th>Booking Status</th>
+  <th>Notes</th>
+  <th>Created</th>
+  <th>Actions</th>
+</tr>
+</thead><tbody id="bookingsTable"><tr>
+<td colspan="15" class="empty">
+Loading bookings...
+</td>
+</tr></tbody></table></div>
+</div>
+</section><!-- CONTACT MESSAGES --><section id="section-messages" class="section"><div class="panel"><div class="panel-header">  <div>
+    <h2>Contact Messages</h2>
+    <p>
+      Messages submitted through the DriveLink contact form.
+    </p>
+  </div>  <button class="btn" onclick="loadContactMessages()">
+    Refresh Messages
+  </button></div><div class="table-wrap"><table><thead>
+<tr>
+  <th>ID</th>
+  <th>Date</th>
+  <th>Name</th>
+  <th>Email</th>
+  <th>Phone</th>
+  <th>Subject</th>
+  <th>Message</th>
+  <th>Status</th>
+  <th>Actions</th>
+</tr>
+</thead><tbody id="messagesTable"><tr>
+<td colspan="9" class="empty">
+Loading contact messages...
+</td>
+</tr></tbody></table></div>
+</div>
+</section><!-- DATABASE --><section id="section-database" class="section"><div class="panel"><div class="panel-header"><div>
+<h2>Database Diagnostics</h2>
+<p>
+Check MySQL connection, tables, columns and record counts.
+</p>
+</div><div><button class="btn btn-secondary" onclick="runDatabaseTest()">
+Test Connection
+</button><button class="btn" onclick="loadDatabaseDiagnostics()">
+Run Diagnostics
+</button></div></div><div class="panel-body"><div class="diagnostic-summary"><div class="diagnostic-box">
+<small>Connection</small>
+<strong id="dbConnection">Not tested</strong>
+</div><div class="diagnostic-box">
+<small>Configured Database</small>
+<strong id="dbConfigured">-</strong>
+</div><div class="diagnostic-box">
+<small>Current Database</small>
+<strong id="dbCurrent">-</strong>
+</div><div class="diagnostic-box">
+<small>Total Tables</small>
+<strong id="dbTableCount">-</strong>
+</div></div><div class="panel"><div class="panel-header">
+<div>
+<h2>Important Tables</h2>
+<p>
+Vehicles, bookings and contact messages.
+</p>
+</div>
+</div><div class="table-wrap"><table><thead>
+<tr>
+<th>Table</th>
+<th>Exists</th>
+<th>Rows</th>
+<th>Columns</th>
+</tr>
+</thead><tbody id="importantTables"><tr>
+<td colspan="4" class="empty">
+Run diagnostics to inspect the database.
+</td>
+</tr></tbody></table></div>
+</div><div class="panel"><div class="panel-header">
+<div>
+<h2>All Database Tables</h2>
+<p>
+Tables detected in the configured database.
+</p>
+</div>
+</div><div class="table-wrap"><table><thead>
+<tr>
+<th>Table Name</th>
+<th>Rows</th>
+<th>Engine</th>
+</tr>
+</thead><tbody id="allTables"><tr>
+<td colspan="3" class="empty">
+No diagnostics loaded.
+</td>
+</tr></tbody></table></div>
+</div><div class="panel"><div class="panel-header">
+<div>
+<h2>Services</h2>
+<p>Current backend service configuration.</p>
+</div>
+</div><div class="panel-body"><div class="diagnostic-summary"><div class="diagnostic-box">
+<small>Gmail</small>
+<strong id="diagGmail">-</strong>
+</div><div class="diagnostic-box">
+<small>M-PESA</small>
+<strong id="diagMpesa">-</strong>
+</div><div class="diagnostic-box">
+<small>Server Time</small>
+<strong id="diagTime">-</strong>
+</div></div></div>
+</div></div>
+</div></section></main>
+</div><!-- MESSAGE MODAL --><div
+id="messageModal"
+class="modal"
+onclick="closeModal(event)"
+><div class="modal-card"><div class="modal-header"><h3 id="modalTitle">
+Contact Message
+</h3><button
+class="modal-close"
+onclick="closeMessageModal()"
+
+«»
+
+×
+</button>
+
+</div><div id="modalBody" class="modal-body"></div></div>
+</div><script>
+
+const API_BASE = "";
+
+let adminUsername =
+sessionStorage.getItem("drivelink_admin_user") || "";
+
+let adminPassword =
+sessionStorage.getItem("drivelink_admin_password") || "";
+
+
+/* =========================================================
+   API
+========================================================= */
+
+async function apiFetch(endpoint, options = {}) {
+
+  const headers = {
+    ...(options.headers || {})
+  };
+
+  if(adminUsername)
+    headers["x-admin-user"] = adminUsername;
+
+  if(adminPassword)
+    headers["x-admin-password"] = adminPassword;
+
+  if(
+    options.body &&
+    typeof options.body === "object"
+  ){
+
+    headers["Content-Type"] =
+      "application/json";
+
+    options.body =
+      JSON.stringify(options.body);
+  }
+
+  const response =
+    await fetch(
+      API_BASE + endpoint,
+      {
+        ...options,
+        headers
+      }
+    );
+
+  let data;
+
+  try{
+    data = await response.json();
+  }catch(e){
+    data = {
+      success:false,
+      error:"Server returned an invalid response."
+    };
+  }
+
+  if(response.status === 401){
+
+    logout();
+
+    throw new Error(
+      "Administrator authentication failed."
+    );
+  }
+
+  if(!response.ok){
+
+    throw new Error(
+      data.error ||
+      data.details ||
+      `Request failed (${response.status})`
+    );
+  }
+
+  return data;
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+document
+.getElementById("loginForm")
+.addEventListener("submit",async function(event){
+
+  event.preventDefault();
+
+  const username =
+    document.getElementById("adminUser").value.trim();
+
+  const password =
+    document.getElementById("adminPassword").value;
+
+  const errorBox =
+    document.getElementById("loginError");
+
+  errorBox.style.display = "none";
+
+  if(!username || !password){
+
+    errorBox.textContent =
+      "Enter your username and password.";
+
+    errorBox.style.display = "block";
+
+    return;
+  }
+
+  adminUsername = username;
+  adminPassword = password;
+
+  try{
+
+    await apiFetch("/api/admin/vehicles");
+
+    sessionStorage.setItem(
+      "drivelink_admin_user",
+      username
+    );
+
+    sessionStorage.setItem(
+      "drivelink_admin_password",
+      password
+    );
+
+    showAdmin();
+
+  }catch(error){
+
+    adminUsername = "";
+    adminPassword = "";
+
+    errorBox.textContent =
+      error.message || "Unable to sign in.";
+
+    errorBox.style.display = "block";
+  }
+
+});
+
+
+/* =========================================================
+   SHOW ADMIN
+========================================================= */
+
+function showAdmin(){
+
+  document.getElementById("loginScreen").style.display="none";
+
+  document.getElementById("adminApp").style.display="block";
+
+  refreshAll();
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout(){
+
+  sessionStorage.removeItem("drivelink_admin_user");
+  sessionStorage.removeItem("drivelink_admin_password");
+
+  adminUsername="";
+  adminPassword="";
+
+  document.getElementById("adminApp").style.display="none";
+
+  document.getElementById("loginScreen").style.display="flex";
+
+  document.getElementById("adminPassword").value="";
+}
+
+
+/* =========================================================
+   INITIAL AUTH
+========================================================= */
+
+if(adminUsername && adminPassword){
+  showAdmin();
+}
+
+
+/* =========================================================
+   ALERT
+========================================================= */
+
+function showAlert(message,type="success"){
+
+  const box =
+    document.getElementById("alertBox");
+
+  box.textContent = message;
+
+  box.className = type;
+
+  box.style.display = "block";
+
+  setTimeout(()=>{
+    box.className="";
+    box.style.display="none";
+  },5000);
+}
+
+
+/* =========================================================
+   TABS
+========================================================= */
+
+document
+.querySelectorAll(".tab-btn")
+.forEach(button=>{
+
+  button.addEventListener("click",()=>{
+
+    document
+    .querySelectorAll(".tab-btn")
+    .forEach(btn=>btn.classList.remove("active"));
+
+    document
+    .querySelectorAll(".section")
+    .forEach(section=>section.classList.remove("active"));
+
+    button.classList.add("active");
+
+    const section =
+      document.getElementById(
+        "section-"+button.dataset.section
+      );
+
+    if(section)
+      section.classList.add("active");
+
+    if(button.dataset.section==="vehicles")
+      loadVehicles();
+
+    if(button.dataset.section==="bookings")
+      loadBookings();
+
+    if(button.dataset.section==="messages")
+      loadContactMessages();
+
+    if(button.dataset.section==="database")
+      loadDatabaseDiagnostics();
+
+  });
+
+});
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+async function refreshAll(){
+
+  await Promise.allSettled([
+    loadVehicles(),
+    loadBookings(),
+    loadContactMessages(),
+    loadHealth()
+  ]);
+}
+
+
+/* =========================================================
+   HEALTH
+========================================================= */
+
+async function loadHealth(){
+
+  try{
+
+    const data =
+      await apiFetch("/health");
+
+    const database =
+      data.database === "connected";
+
+    const gmail =
+      data.gmail === "configured";
+
+    const mpesa =
+      data.mpesa === "configured";
+
+    setStatus(
+      "dashboardStatus",
+      database ? "Online" : "Database error",
+      database
+    );
+
+    setStatus(
+      "serviceDatabase",
+      database ? "Connected" : "Error",
+      database
+    );
+
+    setStatus(
+      "serviceGmail",
+      gmail ? "Configured" : "Not configured",
+      gmail
+    );
+
+    setStatus(
+      "serviceMpesa",
+      mpesa ? "Configured" : "Not configured",
+      mpesa
+    );
+
+    setStatus(
+      "serviceApi",
+      "Online",
+      true
+    );
+
+  }catch(error){
+
+    setStatus(
+      "dashboardStatus",
+      "Offline / Error",
+      false
+    );
+  }
+}
+
+
+function setStatus(id,text,good){
+
+  const element =
+    document.getElementById(id);
+
+  if(!element)return;
+
+  element.textContent=text;
+
+  element.className =
+    good
+      ? "diagnostic-ok"
+      : "diagnostic-error";
+}
+
+
+/* =========================================================
+   VEHICLES
+========================================================= */
+
+async function loadVehicles(){
+
+  const table =
+    document.getElementById("vehiclesTable");
+
+  table.innerHTML=`
+    <tr>
+      <td colspan="14" class="empty">
+        Loading vehicles...
+      </td>
+    </tr>
+  `;
+
+  try{
+
+    const data =
+      await apiFetch("/api/admin/vehicles");
+
+    const vehicles =
+      Array.isArray(data.vehicles)
+        ? data.vehicles
+        : [];
+
+    document.getElementById("statVehicles").textContent =
+      vehicles.length;
+
+    document.getElementById("statPendingVehicles").textContent =
+      vehicles.filter(v =>
+        String(v.status||"")
+        .toLowerCase()==="pending"
+      ).length;
+
+    document.getElementById("statApprovedVehicles").textContent =
+      vehicles.filter(v =>
+        String(v.status||"")
+        .toLowerCase()==="approved"
+      ).length;
+
+    if(!vehicles.length){
+
+      table.innerHTML=`
+        <tr>
+          <td colspan="14" class="empty">
+            No vehicles found.
+          </td>
+        </tr>
+      `;
+
+      return;
+    }
+
+    table.innerHTML =
+      vehicles.map(vehicle=>{
+
+        const status =
+          String(
+            vehicle.status || "pending"
+          ).toLowerCase();
+
+        const driving =
+          vehicle.driving_option ||
+          vehicle.driver_option ||
+          vehicle.driving_type ||
+          vehicle.hire_option ||
+          "Not specified";
+
+        const image =
+          vehicle.image1
+            ? `
+              <img
+                src="${escapeAttr(vehicle.image1)}"
+                class="vehicle-thumb"
+                alt="Vehicle"
+                onerror="this.outerHTML='<div class=&quot;no-image&quot;>No image</div>'"
+              >
+            `
+            : `
+              <div class="no-image">
+                No image
+              </div>
+            `;
+
+        return `
+        <tr>
+
+          <td>
+            <strong>#${escapeHtml(vehicle.id)}</strong>
+          </td>
+
+          <td>
+
+            ${image}
+
+            <strong>
+              ${escapeHtml(vehicle.vehicle_make || "")}
+              ${escapeHtml(vehicle.vehicle_model || "")}
+            </strong>
+
+            <br>
+
+            <span class="small-muted">
+              Year:
+              ${escapeHtml(vehicle.year || "—")}
+            </span>
+
+            ${
+              vehicle.registration_number
+              ? `
+                <br>
+                <span class="small-muted">
+                  Reg:
+                  ${escapeHtml(vehicle.registration_number)}
+                </span>
+              `
+              : ""
+            }
+
+          </td>
+
+          <td>
+            <strong>
+              ${escapeHtml(vehicle.owner_name || "")}
+            </strong>
+          </td>
+
+          <td>
+
+            ${escapeHtml(vehicle.owner_phone || "—")}
+
+            ${
+              vehicle.owner_email
+              ? `
+                <br>
+                <a href="mailto:${escapeAttr(vehicle.owner_email)}">
+                  ${escapeHtml(vehicle.owner_email)}
+                </a>
+              `
+              : ""
+            }
+
+          </td>
+
+          <td class="amount">
+
+            KSh ${formatNumber(vehicle.daily_price)}
+
+            <br>
+
+            <span class="small-muted">
+              per day
+            </span>
+
+          </td>
+
+          <td>
+            ${escapeHtml(vehicle.location || "—")}
+
+            ${
+              vehicle.zip_code
+              ? `
+                <br>
+                <span class="small-muted">
+                  ZIP:
+                  ${escapeHtml(vehicle.zip_code)}
+                </span>
+              `
+              : ""
+            }
+          </td>
+
+          <td>
+            ${escapeHtml(vehicle.transmission || "—")}
+          </td>
+
+          <td>
+            ${escapeHtml(vehicle.fuel_type || "—")}
+          </td>
+
+          <td>
+            ${escapeHtml(vehicle.seats || "—")}
+          </td>
+
+          <td>
+            <strong>
+              ${escapeHtml(driving)}
+            </strong>
+          </td>
+
+          <td class="amount">
+
+            ${
+              vehicle.driver_rate !== null &&
+              vehicle.driver_rate !== undefined &&
+              vehicle.driver_rate !== ""
+              ? `
+                KSh ${formatNumber(vehicle.driver_rate)}
+                <br>
+                <span class="small-muted">
+                  driver rate
+                </span>
+              `
+              : "—"
+            }
+
+          </td>
+
+          <td>
+
+            <span class="badge badge-${escapeAttr(status)}">
+              ${escapeHtml(status)}
+            </span>
+
+          </td>
+
+          <td>
+            ${formatDate(vehicle.created_at)}
+          </td>
+
+          <td class="actions-cell">
+
+            <div class="contact-actions">
+
+              ${
+                status!=="approved"
+                ? `
+                  <button
+                    class="btn btn-success btn-small"
+                    onclick="approveVehicle(${Number(vehicle.id)})"
+                  >
+                    Approve
+                  </button>
+                `
+                : ""
+              }
+
+              ${
+                status!=="rejected"
+                ? `
+                  <button
+                    class="btn btn-warning btn-small"
+                    onclick="rejectVehicle(${Number(vehicle.id)})"
+                  >
+                    Reject
+                  </button>
+                `
+                : ""
+              }
+
+              <button
+                class="btn btn-danger btn-small"
+                onclick="deleteVehicle(${Number(vehicle.id)})"
+              >
+                Delete
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+        `;
+
+      }).join("");
+
+  }catch(error){
+
+    table.innerHTML=`
+      <tr>
+        <td colspan="14" class="empty">
+          ${escapeHtml(error.message)}
+        </td>
+      </tr>
+    `;
+  }
+}
+
+
+/* =========================================================
+   APPROVE
+========================================================= */
+
+async function approveVehicle(id){
+
+  if(!confirm("Approve this vehicle listing?"))
+    return;
+
+  try{
+
+    await apiFetch(
+      `/api/admin/vehicles/${id}/approve`,
+      {method:"POST"}
+    );
+
+    showAlert("Vehicle approved successfully.");
+
+    await loadVehicles();
+
+  }catch(error){
+
+    showAlert(error.message,"error");
+  }
+}
+
+
+/* =========================================================
+   REJECT
+========================================================= */
+
+async function rejectVehicle(id){
+
+  if(!confirm("Reject this vehicle listing?"))
+    return;
+
+  try{
+
+    await apiFetch(
+      `/api/admin/vehicles/${id}/reject`,
+      {method:"POST"}
+    );
+
+    showAlert("Vehicle rejected successfully.");
+
+    await loadVehicles();
+
+  }catch(error){
+
+    showAlert(error.message,"error");
+  }
+}
+
+
+/* =========================================================
+   DELETE VEHICLE
+========================================================= */
+
+async function deleteVehicle(id){
+
+  if(!confirm(
+    "Delete this vehicle permanently? This cannot be undone."
+  ))
+    return;
+
+  try{
+
+    await apiFetch(
+      `/api/admin/vehicles/${id}`,
+      {method:"DELETE"}
+    );
+
+    showAlert("Vehicle deleted successfully.");
+
+    await loadVehicles();
+
+  }catch(error){
+
+    showAlert(error.message,"error");
+  }
+}
+
+
+/* =========================================================
+   BOOKINGS
+========================================================= */
+
+async function loadBookings(){
+
+  const table =
+    document.getElementById("bookingsTable");
+
+  table.innerHTML=`
+    <tr>
+      <td colspan="15" class="empty">
+        Loading bookings...
+      </td>
+    </tr>
+  `;
+
+  try{
+
+    const data =
+      await apiFetch("/api/admin/bookings");
+
+    const bookings =
+      Array.isArray(data.bookings)
+        ? data.bookings
+        : [];
+
+    document.getElementById("statBookings").textContent =
+      bookings.length;
+
+    if(!bookings.length){
+
+      table.innerHTML=`
+        <tr>
+          <td colspan="15" class="empty">
+            No bookings found.
+          </td>
+        </tr>
+      `;
+
+      return;
+    }
+
+    table.innerHTML =
+      bookings.map(booking=>{
+
+       const rawBookingStatus =
+  String(
+    booking.booking_status || "pending"
+  ).toLowerCase();
+
+const bookingStatus =
+  rawBookingStatus === "accepted" ||
+  rawBookingStatus === "confirmed"
+    ? "approved"
+    : rawBookingStatus;
+
+
+        const paymentStatus =
+          String(
+            booking.payment_status || "pending"
+          ).toLowerCase();
+
+        return `
+        <tr>
+
+          <td>
+            <strong>#${escapeHtml(booking.id)}</strong>
+          </td>
+
+          <td>
+
+            <strong>
+              ${escapeHtml(booking.customer_name || "")}
+            </strong>
+
+            <br>
+
+            ${escapeHtml(booking.customer_phone || "—")}
+
+            ${
+              booking.customer_email
+              ? `
+                <br>
+                <a href="mailto:${escapeAttr(booking.customer_email)}">
+                  ${escapeHtml(booking.customer_email)}
+                </a>
+              `
+              : ""
+            }
+
+          </td>
+
+          <td>
+
+            <strong>
+              ${escapeHtml(booking.vehicle_make || "")}
+              ${escapeHtml(booking.vehicle_model || "")}
+            </strong>
+
+            ${
+              booking.registration_number
+              ? `
+                <br>
+                <span class="small-muted">
+                  ${escapeHtml(booking.registration_number)}
+                </span>
+              `
+              : ""
+            }
+
+          </td>
+
+          <td>
+            #${escapeHtml(booking.vehicle_id || "—")}
+          </td>
+
+          <td>
+            ${escapeHtml(booking.pickup_date || "—")}
+          </td>
+
+          <td>
+            ${escapeHtml(booking.return_date || "—")}
+          </td>
+
+          <td>
+            ${escapeHtml(booking.rental_days || "—")}
+          </td>
+
+          <td class="amount">
+            KSh ${formatNumber(booking.daily_price)}
+          </td>
+
+          <td class="amount">
+            KSh ${formatNumber(booking.service_fee)}
+          </td>
+
+          <td class="amount">
+            KSh ${formatNumber(booking.total_amount)}
+          </td>
+
+          <td>
+
+            <span class="badge badge-${escapeAttr(paymentStatus)}">
+              ${escapeHtml(paymentStatus)}
+            </span>
+
+          </td>
+
+          <td>
+
+            <span class="badge badge-${escapeAttr(bookingStatus)}">
+              ${escapeHtml(bookingStatus)}
+            </span>
+
+          </td>
+
+          <td class="message-cell">
+
+            ${
+              booking.notes
+              ? escapeHtml(booking.notes)
+              : "—"
+            }
+
+          </td>
+
+          <td>
+            ${formatDate(
+              booking.created_at ||
+              booking.booking_created_at
+            )}
+          </td>
+
+          <td>
+
+            <select
+  onchange="updateBookingStatus(
+    ${Number(booking.id)},
+    this.value
+  )"
+>
+  <option
+    value="pending"
+    ${bookingStatus === "pending" ? "selected" : ""}
+  >
+    Pending
+  </option>
+
+  <option
+    value="approved"
+    ${
+      bookingStatus === "accepted" ||
+      bookingStatus === "approved" ||
+      bookingStatus === "confirmed"
+        ? "selected"
+        : ""
+    }
+  >
+    Approved
+  </option>
+
+  <option
+    value="completed"
+    ${bookingStatus === "completed" ? "selected" : ""}
+  >
+    Completed
+  </option>
+
+  <option
+    value="cancelled"
+    ${bookingStatus === "cancelled" ? "selected" : ""}
+  >
+    Cancelled
+  </option>
+
+  <option
+    value="rejected"
+    ${bookingStatus === "rejected" ? "selected" : ""}
+  >
+    Rejected
+  </option>
+</select>
+
+          </td>
+
+        </tr>
+        `;
+
+      }).join("");
+
+  }catch(error){
+
+    table.innerHTML=`
+      <tr>
+        <td colspan="15" class="empty">
+          ${escapeHtml(error.message)}
+        </td>
+      </tr>
+    `;
+  }
+}
+
+
+/* =========================================================
+   BOOKING STATUS
+========================================================= */
+
+async function updateBookingStatus(id,status){
+
+  try{
+
+    await apiFetch(
+      `/api/admin/bookings/${id}/status`,
+      {
+        method:"POST",
+        body:{
+          booking_status:status
+        }
+      }
+    );
+
+    showAlert("Booking status updated.");
+
+    await loadBookings();
+
+  }catch(error){
+
+    showAlert(error.message,"error");
+  }
+}
+
+
+/* =========================================================
+   CONTACT MESSAGES
+========================================================= */
+
+async function loadContactMessages(){
+
+  const table =
+    document.getElementById("messagesTable");
+
+  table.innerHTML=`
+    <tr>
+      <td colspan="9" class="empty">
+        Loading contact messages...
+      </td>
+    </tr>
+  `;
+
+  try{
+
+    const data =
+      await apiFetch("/api/admin/contact-messages");
+
+    const messages =
+      Array.isArray(data.messages)
+        ? data.messages
+        : [];
+
+    const newMessages =
+      messages.filter(message =>
+        String(message.status||"new").toLowerCase()==="new"
+      ).length;
+
+    document.getElementById("statMessages").textContent =
+      newMessages;
+
+    if(!messages.length){
+
+      table.innerHTML=`
+        <tr>
+          <td colspan="9" class="empty">
+            No contact messages found.
+          </td>
+        </tr>
+      `;
+
+      return;
+    }
+
+    table.innerHTML =
+      messages.map(message=>{
+
+        const status =
+          String(message.status||"new").toLowerCase();
+
+        const messageJson =
+          encodeURIComponent(
+            JSON.stringify(message)
+          );
+
+        return `
+        <tr>
+
+          <td>
+            #${escapeHtml(message.id)}
+          </td>
+
+          <td>
+            ${formatDate(message.created_at)}
+          </td>
+
+          <td>
+            <strong>
+              ${escapeHtml(message.name || "")}
+            </strong>
+          </td>
+
+          <td>
+            <a href="mailto:${escapeAttr(message.email || "")}">
+              ${escapeHtml(message.email || "")}
+            </a>
+          </td>
+
+          <td>
+            ${escapeHtml(message.phone || "—")}
+          </td>
+
+          <td>
+            ${escapeHtml(message.subject || "No subject")}
+          </td>
+
+          <td class="message-cell">
+            ${escapeHtml(message.message || "")}
+          </td>
+
+          <td>
+
+            <span class="badge badge-${escapeAttr(status)}">
+              ${escapeHtml(status)}
+            </span>
+
+          </td>
+
+          <td>
+
+            <div class="contact-actions">
+
+              <button
+                class="btn btn-small"
+                onclick="viewMessageEncoded('${messageJson}')"
+              >
+                View
+              </button>
+
+              ${
+                status!=="read"
+                ? `
+                  <button
+                    class="btn btn-secondary btn-small"
+                    onclick="updateContactStatus(
+                      ${Number(message.id)},
+                      'read'
+                    )"
+                  >
+                    Read
+                  </button>
+                `
+                : ""
+              }
+
+              ${
+                status!=="replied"
+                ? `
+                  <button
+                    class="btn btn-success btn-small"
+                    onclick="updateContactStatus(
+                      ${Number(message.id)},
+                      'replied'
+                    )"
+                  >
+                    Replied
+                  </button>
+                `
+                : ""
+              }
+
+              ${
+                status!=="closed"
+                ? `
+                  <button
+                    class="btn btn-warning btn-small"
+                    onclick="updateContactStatus(
+                      ${Number(message.id)},
+                      'closed'
+                    )"
+                  >
+                    Close
+                  </button>
+                `
+                : ""
+              }
+
+              <button
+                class="btn btn-danger btn-small"
+                onclick="deleteContactMessage(
+                  ${Number(message.id)}
+                )"
+              >
+                Delete
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+        `;
+
+      }).join("");
+
+  }catch(error){
+
+    table.innerHTML=`
+      <tr>
+        <td colspan="9" class="empty">
+          ${escapeHtml(error.message)}
+        </td>
+      </tr>
+    `;
+  }
+}
+
+
+/* =========================================================
+   VIEW MESSAGE
+========================================================= */
+
+function viewMessageEncoded(encoded){
+
+  try{
+
+    const message =
+      JSON.parse(
+        decodeURIComponent(encoded)
+      );
+
+    viewMessage(message);
+
+  }catch(error){
+
+    showAlert(
+      "Unable to open this message.",
+      "error"
+    );
+  }
+}
+
+
+function viewMessage(message){
+
+  document.getElementById("modalTitle").textContent =
+    message.subject || "Contact Message";
+
+  document.getElementById("modalBody").innerHTML=`
+
+    <p>
+      <strong>Name:</strong>
+      ${escapeHtml(message.name || "")}
+    </p>
+
+    <p>
+      <strong>Email:</strong>
+      <a href="mailto:${escapeAttr(message.email || "")}">
+        ${escapeHtml(message.email || "")}
+      </a>
+    </p>
+
+    <p>
+      <strong>Phone:</strong>
+      ${escapeHtml(message.phone || "Not provided")}
+    </p>
+
+    <p>
+      <strong>Subject:</strong>
+      ${escapeHtml(message.subject || "No subject")}
+    </p>
+
+    <p>
+      <strong>Date:</strong>
+      ${formatDate(message.created_at)}
+    </p>
+
+    <hr>
+
+    <p>
+      <strong>Message:</strong>
+    </p>
+
+    <div>
+      ${escapeHtml(message.message || "").replace(/\n/g,"<br>")}
+    </div>
+  `;
+
+  document
+    .getElementById("messageModal")
+    .classList.add("open");
+}
+
+
+/* =========================================================
+   CONTACT STATUS
+========================================================= */
+
+async function updateContactStatus(id,status){
+
+  try{
+
+    await apiFetch(
+      `/api/admin/contact/${id}/status`,
+      {
+        method:"POST",
+        body:{status}
+      }
+    );
+
+    showAlert(
+      "Contact message status updated."
+    );
+
+    await loadContactMessages();
+
+  }catch(error){
+
+    showAlert(error.message,"error");
+  }
+}
+
+
+/* =========================================================
+   DELETE CONTACT
+========================================================= */
+
+async function deleteContactMessage(id){
+
+  if(!confirm(
+    "Delete this contact message permanently?"
+  ))
+    return;
+
+  try{
+
+    await apiFetch(
+      `/api/admin/contact/${id}`,
+      {method:"DELETE"}
+    );
+
+    showAlert("Contact message deleted.");
+
+    await loadContactMessages();
+
+  }catch(error){
+
+    showAlert(error.message,"error");
+  }
+}
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeMessageModal(){
+
+  document
+    .getElementById("messageModal")
+    .classList.remove("open");
+}
+
+function closeModal(event){
+
+  if(event.target.id==="messageModal")
+    closeMessageModal();
+}
+
+
+/* =========================================================
+   DATABASE TEST
+========================================================= */
+
+async function runDatabaseTest(){
+
+  const connection =
+    document.getElementById("dbConnection");
+
+  connection.textContent="Testing...";
+  connection.className="";
+
+  try{
+
+    const data =
+      await apiFetch("/api/admin/database-test");
+
+    const connected =
+      data.database==="connected";
+
+    connection.textContent =
+      connected
+        ? "Connected"
+        : "Error";
+
+    connection.className =
+      connected
+        ? "diagnostic-ok"
+        : "diagnostic-error";
+
+    document.getElementById("dbConfigured").textContent =
+      data.configured_database || "-";
+
+    document.getElementById("dbCurrent").textContent =
+      data.current_database || "-";
+
+    showAlert(
+      "Database connection test completed."
+    );
+
+  }catch(error){
+
+    connection.textContent="Failed";
+    connection.className="diagnostic-error";
+
+    showAlert(error.message,"error");
+  }
+}
+/* =========================================================
+   DASHBOARD SYSTEM STATUS
+========================================================= */
+async function updateDashboardStatus() {
+  const status = document.getElementById("dashboardStatus");
+
+  if (!status) return;
+
+  status.textContent = "Checking...";
+  status.className = "";
+
+  try {
+    const data = await apiFetch("/api/admin/database-test");
+
+    if (data.database === "connected") {
+      status.textContent = "Online";
+      status.className = "diagnostic-ok";
+    } else {
+      status.textContent = "Database Error";
+      status.className = "diagnostic-error";
+    }
+
+  } catch (error) {
+    console.error("Dashboard status error:", error);
+    status.textContent = "Database Error";
+    status.className = "diagnostic-error";
+  }
+}
+
+/* Run when the page is ready */
+setTimeout(updateDashboardStatus, 500);
+
+/* =========================================================
+   SYSTEM SERVICES STATUS
+========================================================= */
+async function updateSystemServices() {
+  const database = document.getElementById("serviceDatabase");
+  const gmail = document.getElementById("serviceGmail");
+  const mpesa = document.getElementById("serviceMpesa");
+  const api = document.getElementById("serviceApi");
+
+  try {
+    const data = await apiFetch("/api/admin/database-test");
+
+    if (database) {
+      database.textContent =
+        data.database === "connected" ? "Connected" : "Database Error";
+
+      database.className =
+        data.database === "connected"
+          ? "diagnostic-ok"
+          : "diagnostic-error";
+    }
+
+    if (api) {
+      api.textContent = "Online";
+      api.className = "diagnostic-ok";
+    }
+
+    /*
+      Gmail and M-PESA are checked through the diagnostics
+      endpoint so their real configuration status is displayed.
+    */
+    try {
+      const diagnostics = await apiFetch("/api/admin/database-diagnostics");
+
+      if (gmail) {
+        gmail.textContent = diagnostics.gmail || "Unknown";
+        gmail.className =
+          diagnostics.gmail === "Configured"
+            ? "diagnostic-ok"
+            : "diagnostic-error";
+      }
+
+      if (mpesa) {
+        mpesa.textContent = diagnostics.mpesa || "Unknown";
+        mpesa.className =
+          diagnostics.mpesa === "Configured"
+            ? "diagnostic-ok"
+            : "diagnostic-error";
+      }
+
+    } catch (serviceError) {
+      console.error("Service diagnostics error:", serviceError);
+    }
+
+  } catch (error) {
+    console.error("System services error:", error);
+
+    if (database) {
+      database.textContent = "Database Error";
+      database.className = "diagnostic-error";
+    }
+
+    if (api) {
+      api.textContent = "API Error";
+      api.className = "diagnostic-error";
+    }
+  }
+}
+
+setTimeout(updateSystemServices, 700);
+
+
+
+/* =========================================================
+   DATABASE DIAGNOSTICS
+========================================================= */
+
+async function loadDatabaseDiagnostics(){
+
+  const important =
+    document.getElementById("importantTables");
+
+  const allTables =
+    document.getElementById("allTables");
+
+  important.innerHTML=`
+    <tr>
+      <td colspan="4" class="empty">
+        Running database diagnostics...
+      </td>
+    </tr>
+  `;
+
+  try{
+
+    const data =
+      await apiFetch(
+        "/api/admin/database-diagnostics"
+      );
+
+    const connected =
+      data.database_connection==="connected";
+
+    setStatus(
+      "dbConnection",
+      connected ? "Connected" : "Failed",
+      connected
+    );
+
+    document.getElementById("dbConfigured").textContent =
+      data.configured_database || "-";
+
+    document.getElementById("dbCurrent").textContent =
+      data.current_database || "-";
+
+    const tables =
+      Array.isArray(data.tables)
+        ? data.tables
+        : [];
+
+    document.getElementById("dbTableCount").textContent =
+      tables.length;
+
+    const diagnostics =
+      data.important_tables || {};
+
+    important.innerHTML =
+      [
+        "vehicles",
+        "bookings",
+        "contact_messages"
+      ].map(tableName=>{
+
+        const info =
+          diagnostics[tableName] || {};
+
+        const exists =
+          Boolean(info.exists);
+
+        const columns =
+          Array.isArray(info.columns)
+            ? info.columns
+            : [];
+
+        return `
+        <tr>
+
+          <td>
+            <strong>
+              ${escapeHtml(tableName)}
+            </strong>
+          </td>
+
+          <td>
+
+            <span class="badge ${
+              exists
+                ? "badge-approved"
+                : "badge-rejected"
+            }">
+
+              ${
+                exists
+                  ? "Exists"
+                  : "Missing"
+              }
+
+            </span>
+
+          </td>
+
+          <td>
+
+            ${
+              info.row_count===null ||
+              info.row_count===undefined
+              ? "—"
+              : formatNumber(info.row_count)
+            }
+
+          </td>
+
+          <td>
+
+            ${
+              columns.length
+              ? `
+                <details>
+
+                  <summary>
+                    ${columns.length} columns
+                  </summary>
+
+                  <ul class="columns-list">
+
+                    ${
+                      columns.map(column=>`
+
+                        <li>
+
+                          <strong>
+                            ${escapeHtml(
+                              column.COLUMN_NAME || ""
+                            )}
+                          </strong>
+
+                          —
+                          ${escapeHtml(
+                            column.COLUMN_TYPE || ""
+                          )}
+
+                          ${
+                            column.IS_NULLABLE
+                            ? `
+                              (${escapeHtml(
+                                column.IS_NULLABLE
+                              )})
+                            `
+                            : ""
+                          }
+
+                        </li>
+
+                      `).join("")
+                    }
+
+                  </ul>
+
+                </details>
+              `
+              : "No columns"
+            }
+
+          </td>
+
+        </tr>
+        `;
+
+      }).join("");
+
+    if(!tables.length){
+
+      allTables.innerHTML=`
+        <tr>
+          <td colspan="3" class="empty">
+            No tables found.
+          </td>
+        </tr>
+      `;
+
+    }else{
+
+      allTables.innerHTML =
+        tables.map(table=>`
+
+          <tr>
+
+            <td>
+              ${escapeHtml(
+                table.TABLE_NAME || ""
+              )}
+            </td>
+
+            <td>
+              ${formatNumber(
+                table.TABLE_ROWS
+              )}
+            </td>
+
+            <td>
+              ${escapeHtml(
+                table.ENGINE || ""
+              )}
+            </td>
+
+          </tr>
+
+        `).join("");
+    }
+
+    setStatusValue(
+      "diagGmail",
+      data.gmail || "Unknown"
+    );
+
+    setStatusValue(
+      "diagMpesa",
+      data.mpesa || "Unknown"
+    );
+
+    document.getElementById("diagTime").textContent =
+      data.server_time
+        ? formatDate(data.server_time)
+        : "-";
+
+    showAlert(
+      "Database diagnostics completed."
+    );
+
+  }catch(error){
+
+    important.innerHTML=`
+      <tr>
+        <td colspan="4" class="empty">
+          ${escapeHtml(error.message)}
+        </td>
+      </tr>
+    `;
+
+    showAlert(error.message,"error");
+  }
+}
+
+
+function setStatusValue(id,value){
+
+  const element =
+    document.getElementById(id);
+
+  if(!element)return;
+
+  element.textContent=value;
+
+  const lower =
+    String(value).toLowerCase();
+
+  if(
+    lower.includes("configured") ||
+    lower.includes("connected") ||
+    lower.includes("online") ||
+    lower==="ok"
+  ){
+    element.className="diagnostic-ok";
+  }else if(
+    lower.includes("not") ||
+    lower.includes("failed") ||
+    lower.includes("error")
+  ){
+    element.className="diagnostic-error";
+  }else{
+    element.className="";
+  }
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+function formatNumber(value){
+
+  const number=Number(value);
+
+  if(!Number.isFinite(number))
+    return "0";
+
+  return number.toLocaleString("en-KE");
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function formatDate(value){
+
+  if(!value)
+    return "—";
+
+  const date=new Date(value);
+
+  if(Number.isNaN(date.getTime()))
+    return String(value);
+
+  return date.toLocaleString(
+    "en-KE",
+    {
+      dateStyle:"medium",
+      timeStyle:"short"
+    }
+  );
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+/* =========================================================
+   ESCAPE ATTRIBUTE
+========================================================= */
+
+function escapeAttr(value){
+
+  return escapeHtml(value);
+}
+
+
+/* =========================================================
+   STARTUP
+========================================================= */
+
+console.log(
+  "DriveLink Int’l Admin Dashboard loaded."
+);
+
+</script></body>
+</html>

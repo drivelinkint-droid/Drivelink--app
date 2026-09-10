@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>DriveLink Int’l — Rent Cars from Trusted Owners</title>
+
+  <meta
+    name="description"
+    content="DriveLink Int’l connects customers with trusted vehicle owners for convenient car rentals."
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="container nav-wrap">
+
+    <a href="index.html" class="brand">
+      <img
+        src="drivelink_logo_transparent.png"
+        alt="DriveLink Int’l"
+        class="brand-logo"
+      >
+    </a>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html" class="active">Home</a>
+      <a href="vehicles.html">Find a Car</a>
+      <a href="list-your-car.html">List Your Car</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content">
+
+      <div class="hero-text">
+        <span class="eyebrow">DRIVELINK INT’L</span>
+
+        <h1>
+          Find the right car for your journey.
+        </h1>
+
+        <p>
+          Rent quality vehicles from trusted owners through
+          a simple and convenient booking experience.
+        </p>
+
+        <div class="hero-actions">
+          <a href="vehicles.html" class="btn btn-primary">
+            Find a Car
+          </a>
+
+          <a href="list-your-car.html" class="btn btn-secondary">
+            List Your Car
+          </a>
+        </div>
+      </div>
+
+      <div class="search-card">
+
+        <h2>Find a vehicle</h2>
+
+        <p>
+          Browse available cars and choose the one that
+          fits your needs.
+        </p>
+
+        <form action="vehicles.html" method="get">
+
+          <div class="form-group">
+            <label for="location">Location</label>
+
+            <input
+              type="text"
+              id="location"
+              name="location"
+              placeholder="Where do you need a car?"
+            >
+          </div>
+
+          <div class="form-row">
+
+            <div class="form-group">
+              <label for="pickup">Pick-up date</label>
+
+              <input
+                type="date"
+                id="pickup"
+                name="pickup"
+              >
+            </div>
+
+            <div class="form-group">
+              <label for="return">Return date</label>
+
+              <input
+                type="date"
+                id="return"
+                name="return"
+              >
+            </div>
+
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary btn-full"
+          >
+            Search Vehicles
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section class="section trust-section">
+    <div class="container">
+
+      <div class="section-heading centered">
+        <span class="eyebrow">WHY DRIVELINK</span>
+
+        <h2>A simpler way to rent a vehicle</h2>
+
+        <p>
+          We make it easier for customers to discover,
+          compare and request vehicles from vehicle owners.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+
+        <article class="feature-card">
+          <div class="feature-icon">✓</div>
+
+          <h3>Trusted Vehicles</h3>
+
+          <p>
+            Vehicles listed on DriveLink are reviewed before
+            being made available to customers.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">◆</div>
+
+          <h3>Simple Booking</h3>
+
+          <p>
+            Find a vehicle, choose your dates and submit
+            your booking request with ease.
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">24</div>
+
+          <h3>Customer Support</h3>
+
+          <p>
+            Our team helps coordinate the rental process
+            and keeps customers informed.
+          </p>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FEATURED VEHICLES -->
+  <section class="section vehicles-section">
+
+    <div class="container">
+
+      <div class="section-heading split-heading">
+
+        <div>
+          <span class="eyebrow">AVAILABLE VEHICLES</span>
+
+          <h2>Featured vehicles</h2>
+        </div>
+
+        <a href="vehicles.html" class="text-link">
+          Browse all vehicles →
+        </a>
+
+      </div>
+
+      <div
+        id="featuredVehicles"
+        class="vehicle-grid"
+      >
+        <div class="loading-message">
+          Loading available vehicles...
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- OWNER SECTION -->
+  <section class="section owner-section">
+
+    <div class="container owner-layout">
+
+      <div class="owner-content">
+
+        <span class="eyebrow">FOR VEHICLE OWNERS</span>
+
+        <h2>
+          Turn your vehicle into an income opportunity.
+        </h2>
+
+        <p>
+          Have a vehicle that is available for rental?
+          List it on DriveLink and let us help connect
+          you with customers.
+        </p>
+
+        <a
+          href="list-your-car.html"
+          class="btn btn-primary"
+        >
+          List Your Car
+        </a>
+
+      </div>
+
+      <div class="owner-card">
+
+        <div class="owner-step">
+          <strong>01</strong>
+          <div>
+            <h3>Submit your vehicle</h3>
+            <p>Provide your vehicle and owner details.</p>
+          </div>
+        </div>
+
+        <div class="owner-step">
+          <strong>02</strong>
+          <div>
+            <h3>Get reviewed</h3>
+            <p>Our team reviews the submitted information.</p>
+          </div>
+        </div>
+
+        <div class="owner-step">
+          <strong>03</strong>
+          <div>
+            <h3>Receive booking requests</h3>
+            <p>Customers can request your approved vehicle.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section steps-section">
+
+    <div class="container">
+
+      <div class="section-heading centered">
+
+        <span class="eyebrow">HOW IT WORKS</span>
+
+        <h2>Rent a car in three simple steps</h2>
+
+      </div>
+
+      <div class="steps-grid">
+
+        <article class="step-card">
+          <span class="step-number">01</span>
+
+          <h3>Find a vehicle</h3>
+
+          <p>
+            Browse vehicles available in your preferred
+            location.
+          </p>
+        </article>
+
+        <article class="step-card">
+          <span class="step-number">02</span>
+
+          <h3>Submit your booking</h3>
+
+          <p>
+            Select your dates and provide the information
+            needed for your booking request.
+          </p>
+        </article>
+
+        <article class="step-card">
+          <span class="step-number">03</span>
+
+          <h3>Enjoy your journey</h3>
+
+          <p>
+            Once your booking is confirmed, complete the
+            agreed vehicle collection process.
+          </p>
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+
+    <div class="container cta-content">
+
+      <div>
+        <span class="eyebrow">READY TO GET STARTED?</span>
+
+        <h2>Find your next vehicle with DriveLink.</h2>
+
+        <p>
+          Browse our available vehicles today.
+        </p>
+      </div>
+
+      <a
+        href="vehicles.html"
+        class="btn btn-primary"
+      >
+        Browse Vehicles
+      </a>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="site-footer">
+
+  <div class="container footer-grid">
+
+    <div>
+      <a href="index.html" class="brand footer-brand">
+
+        <img
+          src="\uploads\drivelink_logo_transparent.png"
+          alt="DriveLink Int’l"
+          class="brand-logo"
+        >
+
+      </a>
+
+      <p>
+        A vehicle rental marketplace connecting
+        customers with trusted vehicle owners.
+      </p>
+    </div>
+
+    <div>
+
+      <h3>Quick Links</h3>
+
+      <a href="vehicles.html">Find a Car</a>
+      <a href="list-your-car.html">List Your Car</a>
+      <a href="how-it-works.html">How It Works</a>
+      <a href="contact.html">Contact</a>
+
+    </div>
+
+    <div>
+
+      <h3>DriveLink Int’l</h3>
+
+      <p>
+        Making vehicle rental simpler and more convenient.
+      </p>
+
+      <a href="mailto:drivelinkint@gmail.com">
+        drivelinkint@gmail.com
+      </a>
+
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+
+    <div class="container">
+
+      <p>
+        © 2026 DriveLink Int’l. All rights reserved.
+      </p>
+
+    </div>
+
+  </div>
+
+</footer>
+
+<script>
+
+async function loadFeaturedVehicles() {
+
+  const container =
+    document.getElementById("featuredVehicles");
+
+  try {
+
+    const response =
+      await fetch("/api/public/vehicles");
+
+    if (!response.ok) {
+      throw new Error("Unable to load vehicles");
+    }
+
+    const data =
+      await response.json();
+
+    const vehicles =
+      Array.isArray(data.vehicles)
+        ? data.vehicles.slice(0, 6)
+        : [];
+
+    if (!vehicles.length) {
+
+      container.innerHTML = `
+        <div class="empty-message">
+          <h3>No vehicles available yet</h3>
+          <p>
+            Check back soon or list your vehicle with DriveLink.
+          </p>
+        </div>
+      `;
+
+      return;
+    }
+
+    container.innerHTML =
+      vehicles.map(vehicle => {
+
+        const image =
+          vehicle.images &&
+          vehicle.images.length
+            ? vehicle.images[0]
+            : "vehicle-background.jpg";
+
+        const price =
+          Number(vehicle.daily_price || 0)
+            .toLocaleString();
+
+        return `
+
+          <article class="vehicle-card">
+
+            <div class="vehicle-image-wrap">
+
+              <img
+                src="${image}"
+                alt="${vehicle.vehicle_make || ""} ${vehicle.vehicle_model || ""}"
+                class="vehicle-image"
+                loading="lazy"
+                onerror="this.src='vehicle-background.jpg'"
+              >
+
+            </div>
+
+            <div class="vehicle-card-body">
+
+              <div class="vehicle-card-top">
+
+                <div>
+
+                  <h3>
+                    ${vehicle.vehicle_make || ""}
+                    ${vehicle.vehicle_model || ""}
+                  </h3>
+
+                  <p class="vehicle-location">
+                    ${vehicle.location || "Location available on request"}
+                  </p>
+
+                </div>
+
+                <div class="vehicle-price">
+                  <strong>KSh ${price}</strong>
+                  <span>/ day</span>
+                </div>
+
+              </div>
+
+              <div class="vehicle-meta">
+
+                <span>
+                  ${vehicle.transmission || "Automatic"}
+                </span>
+
+                <span>
+                  ${vehicle.fuel_type || "Fuel"}
+                </span>
+
+                <span>
+                  ${vehicle.seats || "—"} seats
+                </span>
+
+              </div>
+
+              <a
+                href="booking.html?vehicle_id=${encodeURIComponent(vehicle.id)}"
+                class="btn btn-primary btn-full"
+              >
+                Book Vehicle
+              </a>
+
+            </div>
+
+          </article>
+
+        `;
+
+      }).join("");
+
+  } catch (error) {
+
+    console.error(error);
+
+    container.innerHTML = `
+      <div class="empty-message">
+        <h3>Vehicles temporarily unavailable</h3>
+        <p>
+          Please try again shortly.
+        </p>
+      </div>
+    `;
+
+  }
+
+}
+
+document.addEventListener(
+  "DOMContentLoaded",
+  loadFeaturedVehicles
+);
+
+</script>
+
+</body>
+</html>

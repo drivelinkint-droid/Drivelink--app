@@ -1,0 +1,1280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>Contact — DriveLink Int’l</title>
+
+  <meta
+    name="description"
+    content="Contact DriveLink Int’l for car hire enquiries, vehicle listings, bookings and customer support in Kenya."
+  >
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* =========================================================
+       DRIVELINK INT'L — CONTACT PAGE
+       COMPLETE VERSION
+       ========================================================= */
+
+    .contact-page {
+      background: #f7f8fa;
+      min-height: 70vh;
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .contact-hero {
+      padding: 70px 20px 60px;
+      background: #111820;
+      color: #fff;
+      text-align: center;
+    }
+
+    .contact-hero .eyebrow {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: #d4af37;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .contact-hero h1 {
+      margin: 0 0 14px;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1.08;
+    }
+
+    .contact-hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      color: #dce2e8;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    /* =========================================================
+       CONTACT SECTION
+       ========================================================= */
+
+    .contact-section {
+      padding: 70px 20px;
+    }
+
+    .contact-grid {
+      max-width: 1180px;
+      margin: 0 auto;
+
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* =========================================================
+       CARDS
+       ========================================================= */
+
+    .contact-info-card,
+    .contact-form-card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      box-shadow:
+        0 12px 35px rgba(17, 24, 32, 0.07);
+    }
+
+    .contact-info-card {
+      padding: 34px;
+    }
+
+    .contact-form-card {
+      padding: 34px;
+    }
+
+    .contact-info-card h2,
+    .contact-form-card h2 {
+      margin: 0 0 10px;
+      color: #111820;
+      font-size: 27px;
+    }
+
+    .contact-info-card > p,
+    .contact-form-card > p {
+      margin: 0 0 28px;
+      color: #66717d;
+      line-height: 1.7;
+    }
+
+    /* =========================================================
+       CONTACT INFORMATION
+       ========================================================= */
+
+    .contact-item {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+
+      padding: 18px 0;
+
+      border-bottom: 1px solid #edf0f2;
+    }
+
+    .contact-item:last-child {
+      border-bottom: 0;
+    }
+
+    .contact-icon {
+      width: 45px;
+      height: 45px;
+
+      flex: 0 0 45px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 12px;
+
+      background: #111820;
+      color: #d4af37;
+
+      font-size: 19px;
+      font-weight: 800;
+    }
+
+    .contact-item strong {
+      display: block;
+      margin-bottom: 5px;
+
+      color: #111820;
+      font-size: 15px;
+    }
+
+    .contact-item a,
+    .contact-item span {
+      color: #5e6873;
+      text-decoration: none;
+      line-height: 1.5;
+
+      word-break: break-word;
+    }
+
+    .contact-item a:hover {
+      color: #b08d20;
+    }
+
+    /* =========================================================
+       CONTACT NOTE
+       ========================================================= */
+
+    .contact-note {
+      margin-top: 24px;
+
+      padding: 18px;
+
+      border-left: 4px solid #d4af37;
+      border-radius: 10px;
+
+      background: #faf8ef;
+
+      color: #5e6873;
+
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .contact-note strong {
+      color: #111820;
+    }
+
+    /* =========================================================
+       FORM
+       ========================================================= */
+
+    .contact-form {
+      display: grid;
+      gap: 18px;
+    }
+
+    .form-row {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+
+      gap: 7px;
+    }
+
+    .form-group label {
+      color: #202832;
+
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .form-group label span {
+      color: #c0392b;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+
+      box-sizing: border-box;
+
+      border: 1px solid #d9dee3;
+      border-radius: 10px;
+
+      background: #fff;
+      color: #111820;
+
+      font: inherit;
+
+      padding: 13px 14px;
+
+      outline: none;
+
+      transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .form-group input,
+    .form-group select {
+      min-height: 48px;
+    }
+
+    .form-group textarea {
+      min-height: 150px;
+
+      resize: vertical;
+
+      line-height: 1.6;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: #d4af37;
+
+      box-shadow:
+        0 0 0 3px rgba(212, 175, 55, 0.13);
+    }
+
+    .form-help {
+      color: #7b858f;
+
+      font-size: 12px;
+
+      line-height: 1.5;
+    }
+
+    /* =========================================================
+       SUBMIT BUTTON
+       ========================================================= */
+
+    .submit-button {
+      width: 100%;
+
+      min-height: 52px;
+
+      border: 0;
+      border-radius: 10px;
+
+      background: #111820;
+      color: #fff;
+
+      cursor: pointer;
+
+      font: inherit;
+      font-weight: 800;
+
+      letter-spacing: .2px;
+
+      transition:
+        transform .2s ease,
+        background .2s ease,
+        opacity .2s ease;
+    }
+
+    .submit-button:hover {
+      background: #202b35;
+
+      transform: translateY(-1px);
+    }
+
+    .submit-button:disabled {
+      opacity: .65;
+
+      cursor: not-allowed;
+
+      transform: none;
+    }
+
+    /* =========================================================
+       STATUS MESSAGE
+       ========================================================= */
+
+    .form-status {
+      display: none;
+
+      padding: 14px 16px;
+
+      border-radius: 10px;
+
+      font-size: 14px;
+
+      line-height: 1.5;
+    }
+
+    .form-status.success {
+      display: block;
+
+      background: #edf8f0;
+
+      border: 1px solid #b8dfc0;
+
+      color: #216b35;
+    }
+
+    .form-status.error {
+      display: block;
+
+      background: #fff1f0;
+
+      border: 1px solid #efc2be;
+
+      color: #9b2c25;
+    }
+
+    .required-note {
+      color: #7b858f;
+
+      font-size: 12px;
+    }
+
+    /* =========================================================
+       HEADER LOGO
+       ========================================================= */
+
+    .header .brand img {
+      width: 135px;
+
+      height: auto;
+
+      max-height: 42px;
+
+      object-fit: contain;
+    }
+
+    /* =========================================================
+       MOBILE / TABLET
+       ========================================================= */
+
+    @media (max-width: 850px) {
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-info-card,
+      .contact-form-card {
+        padding: 26px;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .contact-hero {
+        padding: 52px 18px 45px;
+      }
+
+      .contact-hero p {
+        font-size: 15px;
+      }
+
+      .contact-section {
+        padding: 45px 15px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+      }
+
+      .contact-info-card,
+      .contact-form-card {
+        border-radius: 14px;
+
+        padding: 22px;
+      }
+
+      .contact-info-card h2,
+      .contact-form-card h2 {
+        font-size: 23px;
+      }
+
+      .header .brand img {
+        width: 135px;
+
+        max-height: 42px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =======================================================
+       HEADER
+       ======================================================== -->
+
+  <header class="header">
+
+    <div class="container nav">
+
+      <a
+        class="brand"
+        href="index.html"
+        aria-label="DriveLink Int’l home"
+      >
+
+        <img
+          src="drivelink_logo_transparent.png"
+          alt="DriveLink Int’l"
+        >
+
+      </a>
+
+      <nav aria-label="Main navigation">
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="vehicles.html">
+          Vehicles
+        </a>
+
+        <a href="list-your-car.html">
+          List Your Car
+        </a>
+
+        <a href="how-it-works.html">
+          How It Works
+        </a>
+
+        <a
+          href="contact.html"
+          aria-current="page"
+        >
+          Contact
+        </a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+  <!-- =======================================================
+       HERO
+       ======================================================== -->
+
+  <section class="contact-hero">
+
+    <div class="container">
+
+      <span class="eyebrow">
+        GET IN TOUCH
+      </span>
+
+      <h1>
+        We're Here to Help
+      </h1>
+
+      <p>
+        Have a question about hiring a vehicle, listing your
+        car, making a booking, or partnering with DriveLink
+        Int’l? Send us a message and our team will get back
+        to you.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       CONTACT CONTENT
+       ======================================================== -->
+
+  <main class="contact-page">
+
+    <section class="contact-section">
+
+      <div class="contact-grid">
+
+
+        <!-- =================================================
+             CONTACT INFORMATION
+             ================================================== -->
+
+        <div class="contact-info-card">
+
+          <h2>
+            Contact DriveLink
+          </h2>
+
+          <p>
+            Choose the most convenient way to reach our team.
+            You can also use the enquiry form and we will
+            respond as soon as possible.
+          </p>
+
+
+          <!-- CALL -->
+
+          <div class="contact-item">
+
+            <div class="contact-icon">
+              ☎
+            </div>
+
+            <div>
+
+              <strong>
+                Call Us
+              </strong>
+
+              <a href="tel:+254741937103">
+                0741 937 103
+              </a>
+
+            </div>
+
+          </div>
+
+
+          <!-- WHATSAPP -->
+
+          <div class="contact-item">
+
+            <div class="contact-icon">
+              W
+            </div>
+
+            <div>
+
+              <strong>
+                WhatsApp
+              </strong>
+
+              <a
+                href="https://wa.me/254741937103"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Chat with us on WhatsApp
+              </a>
+
+            </div>
+
+          </div>
+
+
+          <!-- EMAIL -->
+
+          <div class="contact-item">
+
+            <div class="contact-icon">
+              @
+            </div>
+
+            <div>
+
+              <strong>
+                Email
+              </strong>
+
+              <a href="mailto:drivelinkint@gmail.com">
+                drivelinkint@gmail.com
+              </a>
+
+            </div>
+
+          </div>
+
+
+          <!-- LOCATION -->
+
+          <div class="contact-item">
+
+            <div class="contact-icon">
+              ⌖
+            </div>
+
+            <div>
+
+              <strong>
+                Location
+              </strong>
+
+              <span>
+                Nairobi, Kenya
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- NOTE -->
+
+          <div class="contact-note">
+
+            <strong>
+              Need a vehicle quickly?
+            </strong>
+
+            <br>
+
+            For urgent booking enquiries, call or WhatsApp
+            us directly for faster assistance.
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CONTACT FORM
+             ================================================== -->
+
+        <div class="contact-form-card">
+
+          <h2>
+            Send a Message
+          </h2>
+
+          <p>
+            Complete the form below and your enquiry will be
+            securely submitted to DriveLink Int’l.
+          </p>
+
+
+          <form
+            id="contactForm"
+            class="contact-form"
+            novalidate
+          >
+
+
+            <!-- NAME + PHONE -->
+
+            <div class="form-row">
+
+              <div class="form-group">
+
+                <label for="contactName">
+                  Full Name <span>*</span>
+                </label>
+
+                <input
+                  id="contactName"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  placeholder="Enter your full name"
+                  required
+                  maxlength="100"
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="contactPhone">
+                  Phone / WhatsApp <span>*</span>
+                </label>
+
+                <input
+                  id="contactPhone"
+                  name="phone"
+                  type="tel"
+                  autocomplete="tel"
+                  placeholder="e.g. 0741 937 103"
+                  required
+                  maxlength="30"
+                >
+
+              </div>
+
+            </div>
+
+
+            <!-- EMAIL + ENQUIRY TYPE -->
+
+            <div class="form-row">
+
+              <div class="form-group">
+
+                <label for="contactEmail">
+                  Email Address <span>*</span>
+                </label>
+
+                <input
+                  id="contactEmail"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="you@example.com"
+                  required
+                  maxlength="150"
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="enquiryType">
+                  Enquiry Type <span>*</span>
+                </label>
+
+                <select
+                  id="enquiryType"
+                  name="enquiry_type"
+                  required
+                >
+
+                  <option value="">
+                    Select enquiry type
+                  </option>
+
+                  <option value="Car Hire">
+                    Car Hire
+                  </option>
+
+                  <option value="Booking">
+                    Booking Enquiry
+                  </option>
+
+                  <option value="List Your Car">
+                    List My Car
+                  </option>
+
+                  <option value="Partnership">
+                    Partnership
+                  </option>
+
+                  <option value="Payment">
+                    Payment
+                  </option>
+
+                  <option value="General">
+                    General Enquiry
+                  </option>
+
+                  <option value="Complaint">
+                    Complaint / Support
+                  </option>
+
+                  <option value="Other">
+                    Other
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+            <!-- SUBJECT -->
+
+            <div class="form-group">
+
+              <label for="contactSubject">
+                Subject
+              </label>
+
+              <input
+                id="contactSubject"
+                name="subject"
+                type="text"
+                placeholder="What is your enquiry about?"
+                maxlength="200"
+              >
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div class="form-group">
+
+              <label for="contactMessage">
+                Message <span>*</span>
+              </label>
+
+              <textarea
+                id="contactMessage"
+                name="message"
+                placeholder="How can we help you?"
+                required
+                minlength="5"
+                maxlength="5000"
+              ></textarea>
+
+              <div class="form-help">
+                Please provide enough information for our
+                team to understand your enquiry.
+              </div>
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div
+              id="contactStatus"
+              class="form-status"
+              role="status"
+              aria-live="polite"
+            ></div>
+
+
+            <!-- REQUIRED NOTE -->
+
+            <div class="required-note">
+              * Required fields
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <button
+              type="submit"
+              class="submit-button"
+              id="contactSubmitButton"
+            >
+              Send Message
+            </button>
+
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =======================================================
+       FOOTER
+       ======================================================== -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="copyright">
+        © 2026 DriveLink Int’l. All rights reserved.
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =======================================================
+       CONTACT FORM — API CONNECTION
+       ======================================================== -->
+
+  <script>
+
+    (function () {
+
+      const form =
+        document.getElementById("contactForm");
+
+      const button =
+        document.getElementById(
+          "contactSubmitButton"
+        );
+
+      const status =
+        document.getElementById(
+          "contactStatus"
+        );
+
+
+      /* =====================================================
+         SAFETY CHECK
+         ===================================================== */
+
+      if (!form || !button || !status) {
+
+        console.error(
+          "DriveLink contact form elements were not found."
+        );
+
+        return;
+      }
+
+
+      /* =====================================================
+         STATUS FUNCTION
+         ===================================================== */
+
+      function showStatus(message, type) {
+
+        status.textContent = message;
+
+        status.className =
+          "form-status " + type;
+
+      }
+
+
+      /* =====================================================
+         FORM SUBMISSION
+         ===================================================== */
+
+      form.addEventListener(
+        "submit",
+        async function (event) {
+
+          event.preventDefault();
+
+
+          /* =================================================
+             HTML VALIDATION
+             ================================================= */
+
+          if (!form.checkValidity()) {
+
+            form.reportValidity();
+
+            return;
+          }
+
+
+          /* =================================================
+             DISABLE BUTTON
+             ================================================= */
+
+          button.disabled = true;
+
+          button.textContent =
+            "Sending...";
+
+          status.className =
+            "form-status";
+
+          status.textContent =
+            "";
+
+
+          try {
+
+            /* ===============================================
+               COLLECT FORM DATA
+               =============================================== */
+
+            const formData =
+              new FormData(form);
+
+
+            const data = {
+
+              name:
+                String(
+                  formData.get("name") || ""
+                ).trim(),
+
+              phone:
+                String(
+                  formData.get("phone") || ""
+                ).trim(),
+
+              email:
+                String(
+                  formData.get("email") || ""
+                ).trim(),
+
+              enquiry_type:
+                String(
+                  formData.get("enquiry_type") || ""
+                ).trim(),
+
+              subject:
+                String(
+                  formData.get("subject") || ""
+                ).trim(),
+
+              message:
+                String(
+                  formData.get("message") || ""
+                ).trim()
+
+            };
+
+
+            /* ===============================================
+               ADDITIONAL VALIDATION
+               =============================================== */
+
+            if (!data.name) {
+
+              throw new Error(
+                "Please enter your full name."
+              );
+
+            }
+
+
+            if (!data.phone) {
+
+              throw new Error(
+                "Please enter your phone number."
+              );
+
+            }
+
+
+            if (!data.email) {
+
+              throw new Error(
+                "Please enter your email address."
+              );
+
+            }
+
+
+            if (!data.enquiry_type) {
+
+              throw new Error(
+                "Please select an enquiry type."
+              );
+
+            }
+
+
+            if (
+              !data.message ||
+              data.message.length < 5
+            ) {
+
+              throw new Error(
+                "Please enter a message of at least 5 characters."
+              );
+
+            }
+
+
+            /* ===============================================
+               EMAIL FORMAT CHECK
+               =============================================== */
+
+            const emailPattern =
+              /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+            if (!emailPattern.test(data.email)) {
+
+              throw new Error(
+                "Please enter a valid email address."
+              );
+
+            }
+
+
+            /* ===============================================
+               SEND TO NODE / EXPRESS API
+               =============================================== */
+
+            const response =
+              await fetch(
+                "/api/contact",
+                {
+                  method: "POST",
+
+                  headers: {
+                    "Content-Type":
+                      "application/json",
+
+                    "Accept":
+                      "application/json"
+                  },
+
+                  body:
+                    JSON.stringify(data)
+                }
+              );
+
+
+            /* ===============================================
+               READ RESPONSE
+               =============================================== */
+
+            let result = {};
+
+
+            const contentType =
+              response.headers.get(
+                "content-type"
+              ) || "";
+
+
+            if (
+              contentType.includes(
+                "application/json"
+              )
+            ) {
+
+              try {
+
+                result =
+                  await response.json();
+
+              } catch (jsonError) {
+
+                result = {};
+
+              }
+
+            } else {
+
+              const text =
+                await response.text();
+
+              result = {
+
+                success: false,
+
+                message:
+                  text ||
+                  "The server returned an unexpected response."
+
+              };
+
+            }
+
+
+            /* ===============================================
+               HANDLE API FAILURE
+               =============================================== */
+
+            if (
+              !response.ok ||
+              !result.success
+            ) {
+
+              if (
+                response.status === 404
+              ) {
+
+                throw new Error(
+                  "The DriveLink contact service could not be found. Please contact us by phone or WhatsApp."
+                );
+
+              }
+
+
+              throw new Error(
+                result.error ||
+                result.message ||
+                "Unable to send your enquiry."
+              );
+
+            }
+
+
+            /* ===============================================
+               SUCCESS
+               =============================================== */
+
+            showStatus(
+
+              result.message ||
+
+              "Thank you. Your enquiry has been submitted successfully. Our team will contact you shortly.",
+
+              "success"
+
+            );
+
+
+            /* Clear form */
+
+            form.reset();
+
+
+          } catch (error) {
+
+            console.error(
+              "DriveLink contact form error:",
+              error
+            );
+
+
+            showStatus(
+
+              error.message ||
+
+              "We could not send your enquiry. Please try again or contact us by phone or WhatsApp.",
+
+              "error"
+
+            );
+
+          } finally {
+
+            /* =============================================
+               RESTORE BUTTON
+               ============================================= */
+
+            button.disabled =
+              false;
+
+            button.textContent =
+              "Send Message";
+
+          }
+
+        }
+      );
+
+    })();
+
+  </script>
+
+</body>
+</html>

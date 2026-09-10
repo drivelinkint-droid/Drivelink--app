@@ -1,0 +1,17 @@
+{
+  "name": "drivelink-intl",
+  "version": "1.0.0",
+  "description": "DriveLink Int’l vehicle rental marketplace",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.12.0",
+    "nodemailer": "^6.9.16"
+  }
+}

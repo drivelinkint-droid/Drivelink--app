@@ -1,0 +1,2922 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>Book a Vehicle — DriveLink Int’l</title>
+
+  <meta
+    name="description"
+    content="Book your selected vehicle securely through DriveLink Int’l."
+  >
+
+  <link
+    rel="icon"
+    href="drivelink_logo_transparent.png"
+  >
+
+  <style>
+    /* =========================================================
+       DRIVELINK INT'L — BOOKING PAGE
+       Same header system as vehicles.html
+       ========================================================= */
+
+    :root {
+      --black: #0d1117;
+      --dark: #111820;
+      --gold: #c9a227;
+      --gold-dark: #a98516;
+      --white: #ffffff;
+      --light: #f5f6f8;
+      --text: #18202a;
+      --muted: #68717d;
+      --border: #e4e7eb;
+      --shadow: 0 12px 35px rgba(13, 17, 23, 0.09);
+      --radius: 16px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+      background: #f7f8fa;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    /* =========================================================
+       HEADER
+       Same system as vehicles.html
+       ========================================================= */
+
+    .site-header {
+      background: rgba(255, 255, 255, 0.98);
+      border-bottom: 1px solid #eceef1;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+      width: 154px;
+    }
+
+    .brand img {
+      width: 154px;
+      height: auto;
+      max-height: 48px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 27px;
+      margin-left: auto;
+    }
+
+    .main-nav a {
+      position: relative;
+      color: #252b32;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 29px 0;
+      white-space: nowrap;
+      transition: color .2s ease;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      color: var(--gold-dark);
+    }
+
+    .main-nav a.active::after {
+      content: "";
+      position: absolute;
+      height: 2px;
+      background: var(--gold);
+      left: 0;
+      right: 0;
+      bottom: 20px;
+      border-radius: 4px;
+    }
+
+    .header-button {
+      background: var(--black);
+      color: white;
+      padding: 11px 19px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition:
+        transform .2s ease,
+        background .2s ease;
+    }
+
+    .header-button:hover {
+      background: var(--gold-dark);
+      transform: translateY(-1px);
+    }
+
+    /* =========================================================
+       MOBILE MENU
+       ========================================================= */
+
+    .menu-toggle {
+      display: none;
+      margin-left: auto;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: white;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-toggle span {
+      width: 20px;
+      height: 2px;
+      background: var(--black);
+      border-radius: 5px;
+    }
+
+    /* =========================================================
+       BOOKING PAGE
+       ========================================================= */
+
+    .booking-page {
+      min-height: calc(100vh - 78px);
+      background: #f7f8fa;
+      padding: 45px 0 75px;
+    }
+
+    .booking-container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .booking-heading {
+      margin-bottom: 28px;
+    }
+
+    .booking-eyebrow {
+      color: var(--gold-dark);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .booking-heading h1 {
+      margin: 0 0 8px;
+      font-size: clamp(32px, 4vw, 44px);
+      line-height: 1.12;
+      color: var(--black);
+      letter-spacing: -1px;
+    }
+
+    .booking-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    /* =========================================================
+       BOOKING GRID
+       ========================================================= */
+
+    .booking-grid {
+      display: grid;
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .booking-vehicle-card,
+    .booking-form-card,
+    .booking-loading,
+    .booking-error {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    /* =========================================================
+       VEHICLE CARD
+       ========================================================= */
+
+    .booking-vehicle-card {
+      overflow: hidden;
+    }
+
+    .booking-vehicle-image-wrap {
+      width: 100%;
+      height: 330px;
+      background: #eef1f4;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .booking-vehicle-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .booking-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #7a838d;
+      padding: 30px;
+      background: #eef1f4;
+    }
+
+    .booking-approved-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(13, 17, 23, .9);
+      color: #fff;
+      padding: 7px 11px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .4px;
+    }
+
+    .booking-vehicle-content {
+      padding: 24px;
+    }
+
+    .booking-vehicle-title {
+      margin: 0 0 7px;
+      color: var(--black);
+      font-size: 25px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    .booking-vehicle-location {
+      margin: 0 0 19px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .booking-price {
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+      margin-bottom: 20px;
+    }
+
+    .booking-price strong {
+      font-size: 28px;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .booking-price span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* =========================================================
+       VEHICLE DETAILS
+       ========================================================= */
+
+    .booking-vehicle-details {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .vehicle-detail-item {
+      background: #f7f8fa;
+      border-radius: 10px;
+      padding: 13px;
+      border: 1px solid #eceef1;
+    }
+
+    .vehicle-detail-label {
+      display: block;
+      color: #7b858f;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .vehicle-detail-value {
+      display: block;
+      color: var(--black);
+      font-size: 14px;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .booking-description {
+      padding-top: 18px;
+      border-top: 1px solid #e8eaed;
+    }
+
+    .booking-description h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      color: var(--black);
+    }
+
+    .booking-description p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+      white-space: pre-line;
+    }
+
+    /* =========================================================
+       FORM CARD
+       ========================================================= */
+
+    .booking-form-card {
+      padding: 28px;
+    }
+
+    .booking-form-card h2 {
+      margin: 0 0 7px;
+      color: var(--black);
+      font-size: 25px;
+      line-height: 1.25;
+    }
+
+    .booking-form-intro {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .selected-vehicle-notice {
+      background: #f6f7f9;
+      border: 1px solid #e3e6ea;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 22px;
+      font-size: 13px;
+      color: #59636e;
+    }
+
+    .selected-vehicle-notice strong {
+      color: var(--black);
+    }
+
+    /* =========================================================
+       FORM
+       ========================================================= */
+
+    .booking-form {
+      display: grid;
+      gap: 17px;
+    }
+
+    .booking-form-row {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .booking-field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .booking-field label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #29323b;
+    }
+
+    .booking-field input,
+    .booking-field textarea {
+      width: 100%;
+      border: 1px solid #d8dde2;
+      border-radius: 9px;
+      padding: 12px 13px;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--black);
+      background: #fff;
+      outline: none;
+      transition:
+        border .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .booking-field input {
+      min-height: 47px;
+    }
+
+    .booking-field input:focus,
+    .booking-field textarea:focus {
+      border-color: var(--gold-dark);
+      box-shadow:
+        0 0 0 3px rgba(201, 162, 39, .12);
+    }
+
+    .booking-field textarea {
+      min-height: 105px;
+      resize: vertical;
+    }
+
+    /* =========================================================
+       SUMMARY
+       ========================================================= */
+
+    .booking-summary {
+      margin-top: 5px;
+      border-radius: 12px;
+      background: #f7f8fa;
+      border: 1px solid #e5e8eb;
+      padding: 17px;
+    }
+
+    .booking-summary h3 {
+      margin: 0 0 13px;
+      font-size: 16px;
+      color: var(--black);
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 7px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .summary-line strong {
+      color: var(--black);
+      text-align: right;
+    }
+
+    .summary-total {
+      border-top: 1px solid #dfe3e7;
+      margin-top: 7px;
+      padding-top: 13px;
+      font-size: 16px;
+    }
+
+    .summary-total strong {
+      font-size: 20px;
+    }
+
+    /* =========================================================
+       SUBMIT BUTTON
+       ========================================================= */
+
+    .booking-submit {
+      width: 100%;
+      border: 0;
+      border-radius: 10px;
+      padding: 14px 18px;
+      background: var(--black);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition:
+        background .2s ease,
+        transform .2s ease;
+    }
+
+    .booking-submit:hover:not(:disabled) {
+      background: var(--gold-dark);
+      transform: translateY(-1px);
+    }
+
+    .booking-submit:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    /* =========================================================
+       MESSAGES
+       ========================================================= */
+
+    .booking-message {
+      display: none;
+      border-radius: 10px;
+      padding: 13px 15px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .booking-message.success {
+      display: block;
+      background: #edf8f0;
+      border: 1px solid #bfe4c8;
+      color: #1c6a32;
+    }
+
+    .booking-message.error {
+      display: block;
+      background: #fff0f0;
+      border: 1px solid #efc4c4;
+      color: #9b2929;
+    }
+
+    /* =========================================================
+       LOADING / ERROR
+       ========================================================= */
+
+    .booking-loading {
+      padding: 55px 25px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .loading-spinner {
+      width: 34px;
+      height: 34px;
+      border: 3px solid #e5e7e9;
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      animation: spin .8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .booking-error {
+      display: none;
+      padding: 45px 25px;
+      text-align: center;
+      color: #9b2929;
+    }
+
+    .booking-error h2 {
+      margin: 0 0 8px;
+      color: var(--black);
+      font-size: 25px;
+    }
+
+    .booking-error p {
+      margin: 0;
+    }
+
+    .back-to-vehicles {
+      display: inline-flex;
+      margin-top: 18px;
+      background: var(--black);
+      color: #fff;
+      padding: 11px 17px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: background .2s ease;
+    }
+
+    .back-to-vehicles:hover {
+      background: var(--gold-dark);
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+
+    .site-footer {
+      background: var(--black);
+      color: white;
+      padding-top: 55px;
+    }
+
+    .footer-grid {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.7fr 1fr 1fr;
+      gap: 55px;
+      padding-bottom: 45px;
+    }
+
+    .footer-brand .brand {
+      width: 150px;
+      margin-bottom: 17px;
+    }
+
+    .footer-brand .brand img {
+      width: 150px;
+      max-height: 45px;
+    }
+
+    .footer-brand p {
+      max-width: 330px;
+      color: #aeb5bd;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .footer-column h4 {
+      color: white;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .footer-column a {
+      display: block;
+      width: fit-content;
+      color: #aeb5bd;
+      font-size: 13px;
+      margin-bottom: 9px;
+      transition: color .2s ease;
+    }
+
+    .footer-column a:hover {
+      color: #e1c34b;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, .09);
+      text-align: center;
+      padding: 18px 20px;
+      color: #89919a;
+      font-size: 12px;
+    }
+
+    /* =========================================================
+       TABLET
+       ========================================================= */
+
+    @media (max-width: 1050px) {
+
+      .nav {
+        gap: 18px;
+      }
+
+      .main-nav {
+        gap: 17px;
+      }
+
+      .main-nav a {
+        font-size: 13px;
+      }
+
+      .booking-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* =========================================================
+       TABLET / SMALL LAPTOP
+       ========================================================= */
+
+    @media (max-width: 900px) {
+
+      .booking-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .booking-vehicle-image-wrap {
+        height: 360px;
+      }
+    }
+
+    /* =========================================================
+       MOBILE
+       Same mobile header as vehicles.html
+       ========================================================= */
+
+    @media (max-width: 760px) {
+
+      .container {
+        width: min(var(--max), calc(100% - 30px));
+      }
+
+      .site-header {
+        position: relative;
+      }
+
+      .nav {
+        min-height: 70px;
+        width: calc(100% - 30px);
+      }
+
+      .brand,
+      .brand img {
+        width: 135px;
+      }
+
+      .brand img {
+        max-height: 43px;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .header-button {
+        display: none;
+      }
+
+      .main-nav {
+        position: absolute;
+        top: 69px;
+        left: 15px;
+        right: 15px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 15px 30px rgba(0,0,0,.10);
+        padding: 8px 15px;
+        z-index: 999;
+      }
+
+      .main-nav.open {
+        display: flex;
+      }
+
+      .main-nav a {
+        padding: 13px 4px;
+        border-bottom: 1px solid #f0f1f2;
+      }
+
+      .main-nav a:last-child {
+        border-bottom: 0;
+      }
+
+      .main-nav a.active::after {
+        display: none;
+      }
+
+      .booking-page {
+        padding: 30px 0 55px;
+      }
+
+      .booking-container {
+        width: calc(100% - 30px);
+      }
+
+      .booking-heading {
+        margin-bottom: 22px;
+      }
+
+      .booking-heading h1 {
+        font-size: 30px;
+      }
+
+      .booking-heading p {
+        font-size: 14px;
+      }
+
+      .booking-grid {
+        gap: 19px;
+      }
+
+      .booking-vehicle-image-wrap {
+        height: 270px;
+      }
+
+      .booking-vehicle-content,
+      .booking-form-card {
+        padding: 19px;
+      }
+
+      .booking-vehicle-title {
+        font-size: 21px;
+      }
+
+      .booking-form-card h2 {
+        font-size: 21px;
+      }
+
+      .booking-form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        width: calc(100% - 30px);
+        grid-template-columns: 1fr 1fr;
+        gap: 35px 25px;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+    /* =========================================================
+       SMALL PHONES
+       ========================================================= */
+
+    @media (max-width: 430px) {
+
+      .brand,
+      .brand img {
+        width: 125px;
+      }
+
+      .booking-heading h1 {
+        font-size: 27px;
+      }
+
+      .booking-vehicle-image-wrap {
+        height: 230px;
+      }
+
+      .booking-vehicle-title {
+        font-size: 20px;
+      }
+
+      .booking-price strong {
+        font-size: 24px;
+      }
+
+      .booking-vehicle-details {
+        gap: 9px;
+      }
+
+      .vehicle-detail-item {
+        padding: 11px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-brand {
+        grid-column: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =======================================================
+       HEADER
+       ======================================================= -->
+
+  <header class="site-header">
+
+    <div class="container nav">
+
+      <a
+        class="brand"
+        href="index.html"
+        aria-label="DriveLink Int’l home"
+      >
+        <img
+          src="drivelink_logo_transparent.png"
+          alt="DriveLink Int’l"
+        >
+      </a>
+
+      <nav
+        class="main-nav"
+        id="mainNav"
+        aria-label="Main navigation"
+      >
+
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="vehicles.html">
+          Find a Car
+        </a>
+
+        <a href="list-your-car.html">
+          List Your Car
+        </a>
+
+        <a href="how-it-works.html">
+          How It Works
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </nav>
+
+      <a
+        class="header-button"
+        href="vehicles.html"
+      >
+        Book a Car
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Open navigation"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =======================================================
+       MAIN
+       ======================================================= -->
+
+  <main class="booking-page">
+
+    <div class="booking-container">
+
+      <div class="booking-heading">
+
+        <p class="booking-eyebrow">
+          DRIVELINK INT’L
+        </p>
+
+        <h1>
+          Book Your Vehicle
+        </h1>
+
+        <p>
+          Review the selected vehicle and complete your booking request.
+        </p>
+
+      </div>
+
+
+      <!-- =====================================================
+           LOADING
+           ===================================================== -->
+
+      <div
+        id="bookingLoading"
+        class="booking-loading"
+      >
+
+        <div class="loading-spinner"></div>
+
+        <p>
+          Loading your selected vehicle...
+        </p>
+
+      </div>
+
+
+      <!-- =====================================================
+           ERROR
+           ===================================================== -->
+
+      <div
+        id="bookingError"
+        class="booking-error"
+      >
+
+        <h2>
+          Vehicle Not Found
+        </h2>
+
+        <p id="bookingErrorText">
+          We could not find the vehicle you selected.
+        </p>
+
+        <a
+          href="vehicles.html"
+          class="back-to-vehicles"
+        >
+          ← Back to Find a Car
+        </a>
+
+      </div>
+
+
+      <!-- =====================================================
+           BOOKING CONTENT
+           ===================================================== -->
+
+      <div
+        id="bookingContent"
+        class="booking-grid"
+        style="display:none;"
+      >
+
+        <!-- ===================================================
+             SELECTED VEHICLE
+             =================================================== -->
+
+        <section class="booking-vehicle-card">
+
+          <div class="booking-vehicle-image-wrap">
+
+            <img
+              id="vehicleImage"
+              class="booking-vehicle-image"
+              src=""
+              alt="Selected vehicle"
+            >
+
+            <div
+              id="vehicleImagePlaceholder"
+              class="booking-image-placeholder"
+            >
+              Vehicle image unavailable
+            </div>
+
+            <span class="booking-approved-badge">
+              APPROVED
+            </span>
+
+          </div>
+
+
+          <div class="booking-vehicle-content">
+
+            <h2
+              id="vehicleTitle"
+              class="booking-vehicle-title"
+            >
+              Vehicle
+            </h2>
+
+            <p
+              id="vehicleLocation"
+              class="booking-vehicle-location"
+            >
+              📍 Location
+            </p>
+
+
+            <div class="booking-price">
+
+              <strong id="vehiclePrice">
+                KSh 0
+              </strong>
+
+              <span>
+                per day
+              </span>
+
+            </div>
+
+
+            <!-- VEHICLE DETAILS -->
+
+            <div class="booking-vehicle-details">
+
+              <div class="vehicle-detail-item">
+
+                <span class="vehicle-detail-label">
+                  Year
+                </span>
+
+                <span
+                  id="vehicleYear"
+                  class="vehicle-detail-value"
+                >
+                  —
+                </span>
+
+              </div>
+
+
+              <div class="vehicle-detail-item">
+
+                <span class="vehicle-detail-label">
+                  Transmission
+                </span>
+
+                <span
+                  id="vehicleTransmission"
+                  class="vehicle-detail-value"
+                >
+                  —
+                </span>
+
+              </div>
+
+
+              <div class="vehicle-detail-item">
+
+                <span class="vehicle-detail-label">
+                  Fuel Type
+                </span>
+
+                <span
+                  id="vehicleFuel"
+                  class="vehicle-detail-value"
+                >
+                  —
+                </span>
+
+              </div>
+
+
+              <div class="vehicle-detail-item">
+
+                <span class="vehicle-detail-label">
+                  Seats
+                </span>
+
+                <span
+                  id="vehicleSeats"
+                  class="vehicle-detail-value"
+                >
+                  —
+                </span>
+
+              </div>
+
+
+              <div class="vehicle-detail-item">
+
+                <span class="vehicle-detail-label">
+                  Driving Option
+                </span>
+
+                <span
+                  id="vehicleDrivingOption"
+                  class="vehicle-detail-value"
+                >
+                  —
+                </span>
+
+              </div>
+
+
+              <div class="vehicle-detail-item">
+
+                <span class="vehicle-detail-label">
+                  Registration
+                </span>
+
+                <span
+                  id="vehicleRegistration"
+                  class="vehicle-detail-value"
+                >
+                  —
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="booking-description">
+
+              <h3>
+                Vehicle Description
+              </h3>
+
+              <p id="vehicleDescription">
+                No description provided.
+              </p>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ===================================================
+             BOOKING FORM
+             =================================================== -->
+
+        <section class="booking-form-card">
+
+          <h2>
+            Booking Details
+          </h2>
+
+          <p class="booking-form-intro">
+            Enter your details below. Your booking request will be
+            submitted for confirmation.
+          </p>
+
+
+          <div class="selected-vehicle-notice">
+
+            You are booking:
+
+            <strong id="selectedVehicleName">
+              Selected Vehicle
+            </strong>
+
+          </div>
+
+
+          <form
+            id="bookingForm"
+            class="booking-form"
+          >
+
+            <input
+              type="hidden"
+              id="vehicleId"
+              name="vehicle_id"
+            >
+
+
+            <!-- CUSTOMER NAME -->
+
+            <div class="booking-field">
+
+              <label for="customerName">
+                Full Name *
+              </label>
+
+              <input
+                type="text"
+                id="customerName"
+                name="customer_name"
+                placeholder="Enter your full name"
+                autocomplete="name"
+                required
+              >
+
+            </div>
+
+
+            <!-- PHONE + EMAIL -->
+
+            <div class="booking-form-row">
+
+              <div class="booking-field">
+
+                <label for="customerPhone">
+                  Phone Number *
+                </label>
+
+                <input
+                  type="tel"
+                  id="customerPhone"
+                  name="customer_phone"
+                  placeholder="e.g. 0712345678"
+                  autocomplete="tel"
+                  required
+                >
+
+              </div>
+
+
+              <div class="booking-field">
+
+                <label for="customerEmail">
+                  Email Address *
+                </label>
+
+                <input
+                  type="email"
+                  id="customerEmail"
+                  name="customer_email"
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                  required
+                >
+
+              </div>
+
+            </div>
+
+
+            <!-- DATES -->
+
+            <div class="booking-form-row">
+
+              <div class="booking-field">
+
+                <label for="pickupDate">
+                  Pickup Date *
+                </label>
+
+                <input
+                  type="date"
+                  id="pickupDate"
+                  name="pickup_date"
+                  required
+                >
+
+              </div>
+
+
+              <div class="booking-field">
+
+                <label for="returnDate">
+                  Return Date *
+                </label>
+
+                <input
+                  type="date"
+                  id="returnDate"
+                  name="return_date"
+                  required
+                >
+
+              </div>
+
+            </div>
+
+
+            <!-- NOTES -->
+
+            <div class="booking-field">
+
+              <label for="notes">
+                Additional Notes
+              </label>
+
+              <textarea
+                id="notes"
+                name="notes"
+                placeholder="Any special requests or additional information..."
+              ></textarea>
+
+            </div>
+
+
+            <!-- =================================================
+                 BOOKING SUMMARY
+                 ================================================= -->
+
+            <div class="booking-summary">
+
+              <h3>
+                Booking Summary
+              </h3>
+
+
+              <div class="summary-line">
+
+                <span>
+                  Daily rate
+                </span>
+
+                <strong id="summaryDailyRate">
+                  KSh 0
+                </strong>
+
+              </div>
+
+
+              <div class="summary-line">
+
+                <span>
+                  Rental days
+                </span>
+
+                <strong id="summaryDays">
+                  0
+                </strong>
+
+              </div>
+
+
+              <div class="summary-line">
+
+                <span>
+                  Vehicle rental
+                </span>
+
+                <strong id="summaryRental">
+                  KSh 0
+                </strong>
+
+              </div>
+
+
+              <div class="summary-line">
+
+                <span>
+                  Service fee
+                </span>
+
+                <strong id="summaryServiceFee">
+                  KSh 0
+                </strong>
+
+              </div>
+
+
+              <div class="summary-line summary-total">
+
+                <span>
+                  Total
+                </span>
+
+                <strong id="summaryTotal">
+                  KSh 0
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div
+              id="bookingMessage"
+              class="booking-message"
+            ></div>
+
+
+            <!-- SUBMIT -->
+
+            <button
+              type="submit"
+              id="bookingSubmit"
+              class="booking-submit"
+            >
+              Submit Booking Request
+            </button>
+
+          </form>
+
+        </section>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+
+  <footer class="site-footer">
+
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+
+        <a
+          class="brand"
+          href="index.html"
+          aria-label="DriveLink Int’l home"
+        >
+
+          <img
+            src="drivelink_logo_transparent.png"
+            alt="DriveLink Int’l"
+          >
+
+        </a>
+
+        <p>
+          Connecting drivers with trusted vehicle owners.
+        </p>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h4>
+          Explore
+        </h4>
+
+        <a href="vehicles.html">
+          Find a Car
+        </a>
+
+        <a href="list-your-car.html">
+          List Your Car
+        </a>
+
+        <a href="how-it-works.html">
+          How It Works
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h4>
+          Company
+        </h4>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+        <a href="#">
+          Terms
+        </a>
+
+        <a href="#">
+          Privacy
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <p>
+        ©
+        <span id="currentYear"></span>
+        DriveLink Int’l. All rights reserved.
+      </p>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+       ======================================================= -->
+
+  <script>
+    "use strict";
+
+    /*
+    =========================================================
+    DRIVELINK INT'L — BOOKING
+    =========================================================
+    */
+
+    const API_BASE =
+      window.location.origin;
+
+    let selectedVehicle = null;
+    let bookingSubmitted = false;
+
+
+    /* =========================================================
+       YEAR
+       ========================================================= */
+
+    document.getElementById("currentYear").textContent =
+      new Date().getFullYear();
+
+
+    /* =========================================================
+       MOBILE MENU
+       Same system as vehicles.html
+       ========================================================= */
+
+    const menuToggle =
+      document.getElementById("menuToggle");
+
+    const mainNav =
+      document.getElementById("mainNav");
+
+
+    menuToggle.addEventListener(
+      "click",
+      function () {
+
+        const open =
+          mainNav.classList.toggle("open");
+
+        menuToggle.setAttribute(
+          "aria-expanded",
+          open ? "true" : "false"
+        );
+
+      }
+    );
+
+
+    mainNav
+      .querySelectorAll("a")
+      .forEach(function (link) {
+
+        link.addEventListener(
+          "click",
+          function () {
+
+            mainNav.classList.remove("open");
+
+            menuToggle.setAttribute(
+              "aria-expanded",
+              "false"
+            );
+
+          }
+        );
+
+      });
+
+
+    /* =========================================================
+       GET VEHICLE ID
+       ========================================================= */
+
+    function getVehicleIdFromUrl() {
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+      return (
+        params.get("vehicle_id") ||
+        params.get("vehicle") ||
+        params.get("id")
+      );
+
+    }
+
+
+    /* =========================================================
+       CURRENCY
+       ========================================================= */
+
+    function formatCurrency(value) {
+
+      const number =
+        Number(value) || 0;
+
+      return (
+        "KSh " +
+        number.toLocaleString(
+          "en-KE",
+          {
+            maximumFractionDigits: 0
+          }
+        )
+      );
+
+    }
+
+
+    /* =========================================================
+       VEHICLE TITLE
+       ========================================================= */
+
+    function getVehicleTitle(vehicle) {
+
+      const make =
+        vehicle.vehicle_make ||
+        vehicle.make ||
+        "";
+
+      const model =
+        vehicle.vehicle_model ||
+        vehicle.model ||
+        "";
+
+      const title =
+        [make, model]
+          .filter(Boolean)
+          .join(" ")
+          .trim();
+
+      return title || "Selected Vehicle";
+
+    }
+
+
+    /* =========================================================
+       VEHICLE IMAGE
+       ========================================================= */
+
+    function getVehicleImageUrl(vehicle) {
+
+      /*
+       * The DriveLink API may already return absolute
+       * image URLs. Those are used exactly as provided.
+       */
+
+      const possibleImages = [
+
+        vehicle.image1,
+
+        vehicle.image,
+
+        vehicle.photo,
+
+        vehicle.image_url,
+
+        vehicle.images &&
+          vehicle.images[0]
+
+      ];
+
+
+      let image =
+        possibleImages.find(
+          value =>
+            value !== null &&
+            value !== undefined &&
+            String(value).trim() !== ""
+        );
+
+
+      if (!image) {
+        return "";
+      }
+
+
+      image =
+        String(image).trim();
+
+
+      if (
+        image.startsWith("http://") ||
+        image.startsWith("https://") ||
+        image.startsWith("data:")
+      ) {
+
+        return image;
+
+      }
+
+
+      image =
+        image.replace(/^\/+/, "");
+
+
+      if (
+        image.startsWith("uploads/")
+      ) {
+
+        return (
+          API_BASE +
+          "/" +
+          image
+        );
+
+      }
+
+
+      return (
+        API_BASE +
+        "/uploads/" +
+        image
+      );
+
+    }
+
+
+    /* =========================================================
+       SHOW ERROR
+       ========================================================= */
+
+    function showBookingError(message) {
+
+      document.getElementById(
+        "bookingLoading"
+      ).style.display = "none";
+
+
+      document.getElementById(
+        "bookingContent"
+      ).style.display = "none";
+
+
+      document.getElementById(
+        "bookingError"
+      ).style.display = "block";
+
+
+      document.getElementById(
+        "bookingErrorText"
+      ).textContent = message;
+
+    }
+
+
+    /* =========================================================
+       LOAD SELECTED VEHICLE
+       ========================================================= */
+
+    async function loadSelectedVehicle() {
+
+      const vehicleId =
+        getVehicleIdFromUrl();
+
+
+      if (!vehicleId) {
+
+        showBookingError(
+          "No vehicle was selected. Please return to Find a Car and select a vehicle."
+        );
+
+        return;
+
+      }
+
+
+      try {
+
+        const response =
+          await fetch(
+            API_BASE +
+            "/api/public/vehicles",
+            {
+              method: "GET",
+
+              headers: {
+                "Accept":
+                  "application/json"
+              },
+
+              cache: "no-store"
+            }
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Vehicle API returned HTTP " +
+            response.status
+          );
+
+        }
+
+
+        const result =
+          await response.json();
+
+
+        let vehicles = [];
+
+
+        if (Array.isArray(result)) {
+
+          vehicles = result;
+
+        } else if (
+          Array.isArray(result.vehicles)
+        ) {
+
+          vehicles =
+            result.vehicles;
+
+        } else if (
+          Array.isArray(result.data)
+        ) {
+
+          vehicles =
+            result.data;
+
+        }
+
+
+        if (!vehicles.length) {
+
+          throw new Error(
+            "No approved vehicles were returned by the API."
+          );
+
+        }
+
+
+        selectedVehicle =
+          vehicles.find(
+            function (vehicle) {
+
+              const currentId =
+                vehicle.id ??
+                vehicle.vehicle_id;
+
+              return (
+                String(currentId) ===
+                String(vehicleId)
+              );
+
+            }
+          );
+
+
+        if (!selectedVehicle) {
+
+          showBookingError(
+            "The selected vehicle could not be found or is no longer available."
+          );
+
+          return;
+
+        }
+
+
+        displayVehicle(
+          selectedVehicle
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          "DriveLink vehicle loading error:",
+          error
+        );
+
+
+        showBookingError(
+          "We could not load the selected vehicle. Please check your connection and try again."
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       DISPLAY VEHICLE
+       ========================================================= */
+
+    function displayVehicle(vehicle) {
+
+      const id =
+        vehicle.id ??
+        vehicle.vehicle_id;
+
+
+      const title =
+        getVehicleTitle(vehicle);
+
+
+      const location =
+        vehicle.location ||
+        "Location not specified";
+
+
+      const dailyPrice =
+        Number(
+          vehicle.daily_price
+        ) || 0;
+
+
+      const year =
+        vehicle.year ||
+        "—";
+
+
+      const transmission =
+        vehicle.transmission ||
+        "—";
+
+
+      const fuel =
+        vehicle.fuel_type ||
+        vehicle.fuel ||
+        "—";
+
+
+      const seats =
+        vehicle.seats ||
+        "—";
+
+
+      const registration =
+        vehicle.registration_number ||
+        "—";
+
+
+      const drivingOption =
+        vehicle.driving_option ||
+        vehicle.drive_option ||
+        vehicle.driver_option ||
+        vehicle.driver_type ||
+        vehicle.rental_option ||
+        "—";
+
+
+      const description =
+        vehicle.description ||
+        "No description provided.";
+
+
+      /* =====================================================
+         TEXT
+         ===================================================== */
+
+      document.getElementById(
+        "vehicleTitle"
+      ).textContent = title;
+
+
+      document.getElementById(
+        "selectedVehicleName"
+      ).textContent = title;
+
+
+      document.getElementById(
+        "vehicleLocation"
+      ).textContent =
+        "📍 " + location;
+
+
+      document.getElementById(
+        "vehiclePrice"
+      ).textContent =
+        formatCurrency(
+          dailyPrice
+        );
+
+
+      document.getElementById(
+        "vehicleYear"
+      ).textContent = year;
+
+
+      document.getElementById(
+        "vehicleTransmission"
+      ).textContent =
+        transmission;
+
+
+      document.getElementById(
+        "vehicleFuel"
+      ).textContent = fuel;
+
+
+      document.getElementById(
+        "vehicleSeats"
+      ).textContent = seats;
+
+
+      document.getElementById(
+        "vehicleDrivingOption"
+      ).textContent =
+        drivingOption;
+
+
+      document.getElementById(
+        "vehicleRegistration"
+      ).textContent =
+        registration;
+
+
+      document.getElementById(
+        "vehicleDescription"
+      ).textContent =
+        description;
+
+
+      /* =====================================================
+         HIDDEN VEHICLE ID
+         ===================================================== */
+
+      document.getElementById(
+        "vehicleId"
+      ).value = id;
+
+
+      /* =====================================================
+         IMAGE
+         ===================================================== */
+
+      const imageElement =
+        document.getElementById(
+          "vehicleImage"
+        );
+
+
+      const placeholder =
+        document.getElementById(
+          "vehicleImagePlaceholder"
+        );
+
+
+      const imageUrl =
+        getVehicleImageUrl(
+          vehicle
+        );
+
+
+      imageElement.style.display =
+        "none";
+
+
+      placeholder.style.display =
+        "flex";
+
+
+      if (imageUrl) {
+
+        imageElement.onload =
+          function () {
+
+            imageElement.style.display =
+              "block";
+
+            placeholder.style.display =
+              "none";
+
+          };
+
+
+        imageElement.onerror =
+          function () {
+
+            console.warn(
+              "DriveLink image failed:",
+              imageUrl
+            );
+
+            imageElement.style.display =
+              "none";
+
+            placeholder.style.display =
+              "flex";
+
+          };
+
+
+        imageElement.src =
+          imageUrl;
+
+
+        imageElement.alt =
+          title +
+          " — DriveLink Int’l";
+
+      }
+
+
+      /* =====================================================
+         SHOW PAGE
+         ===================================================== */
+
+      document.getElementById(
+        "bookingLoading"
+      ).style.display =
+        "none";
+
+
+      document.getElementById(
+        "bookingError"
+      ).style.display =
+        "none";
+
+
+      document.getElementById(
+        "bookingContent"
+      ).style.display =
+        "grid";
+
+
+      updateBookingSummary();
+
+    }
+
+
+    /* =========================================================
+       DATE HELPERS
+       ========================================================= */
+
+    function getTodayString() {
+
+      const now =
+        new Date();
+
+
+      const year =
+        now.getFullYear();
+
+
+      const month =
+        String(
+          now.getMonth() + 1
+        ).padStart(2, "0");
+
+
+      const day =
+        String(
+          now.getDate()
+        ).padStart(2, "0");
+
+
+      return (
+        year +
+        "-" +
+        month +
+        "-" +
+        day
+      );
+
+    }
+
+
+    function calculateRentalDays() {
+
+      const pickupValue =
+        document.getElementById(
+          "pickupDate"
+        ).value;
+
+
+      const returnValue =
+        document.getElementById(
+          "returnDate"
+        ).value;
+
+
+      if (
+        !pickupValue ||
+        !returnValue
+      ) {
+
+        return 0;
+
+      }
+
+
+      const pickup =
+        new Date(
+          pickupValue +
+          "T00:00:00"
+        );
+
+
+      const returnDate =
+        new Date(
+          returnValue +
+          "T00:00:00"
+        );
+
+
+      const difference =
+        returnDate.getTime() -
+        pickup.getTime();
+
+
+      const days =
+        Math.round(
+          difference /
+          86400000
+        );
+
+
+      return days > 0
+        ? days
+        : 0;
+
+    }
+
+
+    /* =========================================================
+       BOOKING SUMMARY
+       ========================================================= */
+
+    function updateBookingSummary() {
+
+      if (!selectedVehicle) {
+        return;
+      }
+
+
+      const dailyPrice =
+        Number(
+          selectedVehicle.daily_price
+        ) || 0;
+
+
+      const days =
+        calculateRentalDays();
+
+
+      const rental =
+        dailyPrice * days;
+
+
+      /*
+       * DriveLink service fee:
+       * 10% of the vehicle rental amount.
+       */
+
+      const serviceFee =
+        Math.round(
+          rental * 0.10
+        );
+
+
+      const total =
+        rental +
+        serviceFee;
+
+
+      document.getElementById(
+        "summaryDailyRate"
+      ).textContent =
+        formatCurrency(
+          dailyPrice
+        );
+
+
+      document.getElementById(
+        "summaryDays"
+      ).textContent =
+        days;
+
+
+      document.getElementById(
+        "summaryRental"
+      ).textContent =
+        formatCurrency(
+          rental
+        );
+
+
+      document.getElementById(
+        "summaryServiceFee"
+      ).textContent =
+        formatCurrency(
+          serviceFee
+        );
+
+
+      document.getElementById(
+        "summaryTotal"
+      ).textContent =
+        formatCurrency(
+          total
+        );
+
+    }
+
+
+    /* =========================================================
+       DATE VALIDATION
+       ========================================================= */
+
+    function setupDateValidation() {
+
+      const pickup =
+        document.getElementById(
+          "pickupDate"
+        );
+
+
+      const returnDate =
+        document.getElementById(
+          "returnDate"
+        );
+
+
+      const today =
+        getTodayString();
+
+
+      pickup.min =
+        today;
+
+
+      returnDate.min =
+        today;
+
+
+      pickup.addEventListener(
+        "change",
+        function () {
+
+          if (pickup.value) {
+
+            returnDate.min =
+              pickup.value;
+
+          }
+
+
+          if (
+            returnDate.value &&
+            pickup.value &&
+            returnDate.value <=
+              pickup.value
+          ) {
+
+            returnDate.value =
+              "";
+
+          }
+
+
+          updateBookingSummary();
+
+        }
+      );
+
+
+      returnDate.addEventListener(
+        "change",
+        function () {
+
+          if (
+            pickup.value &&
+            returnDate.value &&
+            returnDate.value <=
+              pickup.value
+          ) {
+
+            showBookingMessage(
+              "Return date must be after the pickup date.",
+              "error"
+            );
+
+
+            returnDate.value =
+              "";
+
+          }
+
+
+          updateBookingSummary();
+
+        }
+      );
+
+    }
+
+
+    /* =========================================================
+       MESSAGE
+       ========================================================= */
+
+    function showBookingMessage(
+      message,
+      type
+    ) {
+
+      const element =
+        document.getElementById(
+          "bookingMessage"
+        );
+
+
+      element.textContent =
+        message;
+
+
+      element.className =
+        "booking-message " +
+        type;
+
+    }
+
+
+    /* =========================================================
+       SUBMIT BOOKING
+       ========================================================= */
+
+    async function submitBooking(event) {
+
+      event.preventDefault();
+
+
+      if (bookingSubmitted) {
+        return;
+      }
+
+
+      if (!selectedVehicle) {
+
+        showBookingMessage(
+          "The selected vehicle could not be found.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      const form =
+        document.getElementById(
+          "bookingForm"
+        );
+
+
+      if (!form.checkValidity()) {
+
+        form.reportValidity();
+
+        return;
+
+      }
+
+
+      const vehicleId =
+        Number(
+          selectedVehicle.id ??
+          selectedVehicle.vehicle_id
+        );
+
+
+      const dailyPrice =
+        Number(
+          selectedVehicle.daily_price
+        ) || 0;
+
+
+      const pickupDate =
+        document.getElementById(
+          "pickupDate"
+        ).value;
+
+
+      const returnDate =
+        document.getElementById(
+          "returnDate"
+        ).value;
+
+
+      const rentalDays =
+        calculateRentalDays();
+
+
+      if (!vehicleId) {
+
+        showBookingMessage(
+          "Invalid vehicle selected. Please return to Find a Car and select the vehicle again.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if (
+        !pickupDate ||
+        !returnDate
+      ) {
+
+        showBookingMessage(
+          "Please select both pickup and return dates.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if (
+        returnDate <=
+        pickupDate
+      ) {
+
+        showBookingMessage(
+          "Return date must be after the pickup date.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if (rentalDays < 1) {
+
+        showBookingMessage(
+          "Please select valid rental dates.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      const bookingData = {
+
+        vehicle_id:
+          vehicleId,
+
+        customer_name:
+          document.getElementById(
+            "customerName"
+          ).value.trim(),
+
+        customer_phone:
+          document.getElementById(
+            "customerPhone"
+          ).value.trim(),
+
+        customer_email:
+          document.getElementById(
+            "customerEmail"
+          ).value.trim(),
+
+        pickup_date:
+          pickupDate,
+
+        return_date:
+          returnDate,
+
+        rental_days:
+          rentalDays,
+
+        daily_price:
+          dailyPrice,
+
+        notes:
+          document.getElementById(
+            "notes"
+          ).value.trim()
+
+      };
+
+
+      /* =====================================================
+         BASIC VALIDATION
+         ===================================================== */
+
+      if (
+        !bookingData.customer_name
+      ) {
+
+        showBookingMessage(
+          "Please enter your full name.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if (
+        !bookingData.customer_phone
+      ) {
+
+        showBookingMessage(
+          "Please enter your phone number.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if (
+        !bookingData.customer_email
+      ) {
+
+        showBookingMessage(
+          "Please enter your email address.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      /* =====================================================
+         SUBMIT STATE
+         ===================================================== */
+
+      const submitButton =
+        document.getElementById(
+          "bookingSubmit"
+        );
+
+
+      submitButton.disabled =
+        true;
+
+
+      submitButton.textContent =
+        "Submitting Booking...";
+
+
+      showBookingMessage(
+        "Submitting your booking request...",
+        "success"
+      );
+
+
+      try {
+
+        const response =
+          await fetch(
+            API_BASE +
+            "/api/bookings",
+            {
+
+              method: "POST",
+
+              headers: {
+
+                "Content-Type":
+                  "application/json",
+
+                "Accept":
+                  "application/json"
+
+              },
+
+              body:
+                JSON.stringify(
+                  bookingData
+                )
+
+            }
+          );
+
+
+        const text =
+          await response.text();
+
+
+        let result = {};
+
+
+        try {
+
+          result =
+            text
+              ? JSON.parse(text)
+              : {};
+
+        } catch {
+
+          result = {
+            message: text
+          };
+
+        }
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            result.error ||
+            result.message ||
+            (
+              "Booking request failed (" +
+              response.status +
+              ")."
+            )
+          );
+
+        }
+
+
+        /* =================================================
+           SUCCESS
+           ================================================= */
+
+        bookingSubmitted =
+          true;
+
+
+        showBookingMessage(
+          result.message ||
+          "Your booking request has been submitted successfully. DriveLink Int’l will contact you to confirm the booking.",
+          "success"
+        );
+
+
+        submitButton.textContent =
+          "Booking Submitted";
+
+
+        /*
+         * Customer details remain visible after submission.
+         */
+
+      } catch (error) {
+
+        console.error(
+          "DriveLink booking submission error:",
+          error
+        );
+
+
+        showBookingMessage(
+          error.message ||
+          "Something went wrong while submitting your booking. Please try again.",
+          "error"
+        );
+
+
+        submitButton.disabled =
+          false;
+
+
+        submitButton.textContent =
+          "Submit Booking Request";
+
+      }
+
+    }
+
+
+    /* =========================================================
+       START
+       ========================================================= */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+        setupDateValidation();
+
+
+        document
+          .getElementById(
+            "bookingForm"
+          )
+          .addEventListener(
+            "submit",
+            submitBooking
+          );
+
+
+        loadSelectedVehicle();
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
