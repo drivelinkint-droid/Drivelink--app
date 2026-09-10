@@ -430,7 +430,7 @@ async function loadFeaturedVehicles() {
   try {
 
     const response =
-      await fetch("/api/public/vehicles");
+      await fetch("https://api.drivelinkint.com/api/public/vehicles");
 
     if (!response.ok) {
       throw new Error("Unable to load vehicles");
